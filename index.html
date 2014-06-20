@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div class="fallingOrange" style="position:absolute; top:30px; left:0">o</div>
+<div class="fallingOrange" style="position:absolute; top:0; left:0">o</div>
 
 <script>
 $(function(){
@@ -16,11 +16,12 @@ var width = $(document).width()
 var height = $(document).height()
 var orange = new FallingObject(0);
 var fO = $('.fallingOrange');
+var cruise = 10;
 
 setInterval(function(){
   var o = orange.currentHeight()*10;
-
-  $('.fallingOrange').animate({'left':-(o%width)},0);
+  cruise += 10;
+  $('.fallingOrange').animate({'left': cruise%width },0);
   $('.fallingOrange').animate({'top':-(o%height)},0);
 },50);
 
