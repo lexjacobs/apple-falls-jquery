@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Falling Things</title>
+  <script src="script/jquery.min.js"></script>
+  <script src="script/gravity.js"></script>
+</head>
+<body>
+
+<div class="fallingOrange" style="position:absolute; top:30px; left:0">o</div>
+
+<script>
+$(function(){
+
+var width = $(document).width()
+var height = $(document).height()
+var orange = new FallingObject(0);
+var fO = $('.fallingOrange');
+
+setInterval(function(){
+  var o = orange.currentHeight()*10;
+
+  $('.fallingOrange').animate({'left':-(o%width)},0);
+  $('.fallingOrange').animate({'top':-(o%height)},0);
+},50);
+
+
+});
+
+</script>
+
+</body>
+</html>
