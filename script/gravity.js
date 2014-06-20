@@ -1,12 +1,12 @@
 // http://www.gravitycalc.com/
 
-var FallingObject = function(height){
+var FallingObject = function(height, g){
 
   var height = height;
 
   var startTime = new Date();
 
-  var g = 9.80665;
+  var g = (g * 9.80665);
 
   this.currentHeight = function(){
 
