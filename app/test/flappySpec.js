@@ -11,14 +11,14 @@ describe("flappyThings", function() {
 
 describe('board', function(){
   it('should make a board of the proper size', function(){
-    var b = new boardMaker(11,30);
+    var b = new BoardMaker(11,30);
 
     expect(b.board.length).to.be.equal(30);
     expect(b.board[0].length).to.be.equal(11);
   });
 
   it('should place the apple on the first row', function(){
-    var b = new boardMaker(11,30);
+    var b = new BoardMaker(11,30);
     b.board[0][0] = 'o';
 
     expect(b.board[0][0]).to.equal('o');
@@ -28,7 +28,7 @@ describe('board', function(){
 
 describe('movement', function(){
   it('apple should move left and right', function(){
-    var b = new boardMaker(11,30);
+    var b = new BoardMaker(11,30);
     b.board[0][0] = 'o';
     expect(b.board[0][0]).to.equal('o');
     expect(b.board[0][1]).to.equal('x');
@@ -49,7 +49,7 @@ describe('movement', function(){
 
 
   it('apple should not move outside of board edges', function(){
-    var b = new boardMaker(11,30);
+    var b = new BoardMaker(11,30);
     b.board[0][0] = 'o';
     expect(b.board[0][0]).to.equal('o');
     expect(b.board[0][1]).to.equal('x');

@@ -1,10 +1,8 @@
-$board = new boardMaker(5,5);
+$board = new BoardMaker(5,5);
 
 // place apple
 
 $board.board[0][0] = 'o';
-
-
 
 // console.log($board);
 

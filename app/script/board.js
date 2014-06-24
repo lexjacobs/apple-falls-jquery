@@ -1,4 +1,4 @@
-var boardMaker = function(nX, nY){
+var BoardMaker = function(nX, nY){
 
   this.board = [];
   
@@ -11,8 +11,9 @@ var boardMaker = function(nX, nY){
       this.board[j].push('x');
     }
   }
+};
 
-this.moveRight = function(){
+BoardMaker.prototype.moveRight = function(){
   for(var i = 0; i < this.board[0].length; i++){
 
     if(this.board[0][i] === 'o' && i < this.board[0].length-1){
@@ -24,7 +25,7 @@ this.moveRight = function(){
   return;
 }
 
-this.moveLeft = function(){
+BoardMaker.prototype.moveLeft = function(){
   for(var i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] === 'o' && i !== 0){
       this.board[0][i] = 'x';
@@ -34,6 +35,3 @@ this.moveLeft = function(){
   }
   return;
 }
-
-};
-
