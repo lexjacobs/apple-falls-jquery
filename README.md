@@ -1,4 +1,4 @@
-flappy-thing
-============
+apple-falls
+===========
 
-practicing physics and affecting objects via DOM manipulation
+Practicing physics and rendering objects via jQuery DOM manipulation
