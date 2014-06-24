@@ -4,51 +4,14 @@
   <title>Falling Things</title>
   <script src="script/jquery.min.js"></script>
   <script src="script/gravity.js"></script>
+  <script src="script/keybindings.js"></script>
+  <script src="script/board.js"></script>
+  <script src="script/gameLoop.js"></script>
+
 </head>
 <body>
 
-<div class ="objects">
-<div class="fallingOrange" style="position:absolute; top:0; left:0">O</div>
-<div class="fallingOrange2" style="position:absolute; top:0; left:0">X</div>
-</div>
-
-<script>
-$(function(){
-
-$('body').on('keydown', function(e){
-  if(e.keyCode === 80){
-    $('.fallingOrange').text('\\/');
-  }
-})
-
-$('body').on('keydown', function(e){
-  if(e.keyCode === 79){
-    $('.fallingOrange').text('O');
-  }
-})
-
-var width = $(document).width()
-var height = $(document).height()
-var orange = new FallingObject(0, 1);
-var orange2 = new FallingObject(0, 3);
-var fO = $('.fallingOrange');
-var f1 = $('.fallingOrange2');
-var cruise = 10;
-
-setInterval(function(){
-  var o = orange.currentHeight()*2;
-  var o2 = orange2.currentHeight()*2;
-  cruise += 1;
-  fO.animate({'left': cruise%width },0);
-  fO.animate({'top':-(o%height)},0);
-  f1.animate({'left': cruise%width },0);
-  f1.animate({'top':-(o2%height)},0);
-},2);
-
-
-});
-
-</script>
+<div class ="board">
 
 </body>
 </html>

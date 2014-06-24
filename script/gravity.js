@@ -6,7 +6,7 @@ var FallingObject = function(height, g){
 
   var startTime = new Date();
 
-  var g = (g * 9.80665);
+  var g = (g * 10);
 
   this.currentHeight = function(){
 
@@ -18,36 +18,4 @@ var FallingObject = function(height, g){
     return height - fallen;
   }
 
-  this.stats = function(){
-    console.log('currentHeight: ', this.currentHeight().toFixed(2));
-  }
-
 };
-
-// var orange = new FallingObject(316);
-
-// console.log(orange.currentHeight());
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 1000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 2000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 3000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 4000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 5000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 6000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 7000)
-// setTimeout(function(){
-//   console.log(orange.stats());
-// }, 8000)
