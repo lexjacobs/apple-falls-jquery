@@ -4,26 +4,30 @@ body {
 }
 
 .board {
-width: 118px;
-background-color: beige;
-border: dashed;
-border-width: 4px;
-padding: 8px;
-margin-left:40%;
-margin-right:60%;
+  width: 118px;
+  background-color: beige;
+  border: dashed;
+  border-width: 4px;
+  padding: 8px;
+  margin-left:40%;
+  margin-right:60%;
 }
 
 .status {
-position: absolute;
-text-align: right;
-right:0;
-top:0;
+  position: absolute;
+  text-align: right;
+  right:0;
+  top:0;
 }
 
 .vitals {
-position: absolute;
-left:0;
-top:0;
+  position: absolute;
+  left:5px;
+  top:0;
+}
+
+.instructions {
+  font-size: 20px;
 }
 
 .spot {

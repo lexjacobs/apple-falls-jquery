@@ -61,7 +61,7 @@ BoardMaker.prototype.deploy = function(){
       },3000);
 
       $parachuteCount--;
-      $timeDecreaser.current = -1;
+      $timeDecreaser.current = 1;
       break;
     }
   }
