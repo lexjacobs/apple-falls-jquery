@@ -1,6 +1,6 @@
 $blankSpace = "<span class='spot'>&nbsp;</span>";
 $apple = "<span class = 'spot'>o</span>"
-
+$brick = "<span class = 'spot brick'>X</span>"
 
 var BoardMaker = function(nX, nY){
 
