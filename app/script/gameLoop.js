@@ -1,19 +1,13 @@
 $board = new BoardMaker(5,8);
 
 // place apple
-
-$board.board[0][0] = 'o';
-
-// console.log($board);
+$board.board[0][0] = '<span class = "spot">o</span>';
 
 $(function(){
 
-  // start interval
-  // setInterval(function(){
-
-    // clear board at beginning of interval
-  
 $render = function(){
+
+  // clear board at beginning of interval
   $('.board').text('');
 
   // iterate through board and render each item found in arrays
@@ -25,10 +19,18 @@ $render = function(){
   }
 }
 
+// initial rendering
 $render();        
-        
 
-  // }, 10);
-
-
+// end of document ready loop
 });
+
+
+// use for future gravity issues:
+var setter = function(callback, time){
+  setTimeout(callback, time);
+};
+
+setter(function(){
+alert('hoboy');
+}, 1000);
