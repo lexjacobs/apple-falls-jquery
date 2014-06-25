@@ -1,8 +1,6 @@
 // generates bricks
 $obstacleGen = function(board){
-
   var randomNumber = Math.random();
-
   // generates obstacles in the first row
   if(randomNumber < 0.5){
     var rows = board.length;
@@ -15,12 +13,7 @@ $obstacleGen = function(board){
 // advances obstacles
 $obstacleAdvance = function(board){
   if($collisionDetect(board)){
-    $('.status').append('BONK!'+ '<br>')
-    if($lifeCount === 0){
-      $endOfGame();
-    } else {
-      $lifeCount--;
-    }
+    $collisionHappened();
   };
   for (var i = 0; i < board.length-1; i++) {
     for (var j = 0; j < board[i].length; j++) {
@@ -34,18 +27,6 @@ $obstacleAdvance = function(board){
   $scoreCount += 10;
 };
 
-// set interval of advancement
-$advancer = setInterval(function(){
-  $obstacleAdvance($board.board);
-}, 300);
-
-
-// set interval of obstacle generation once per second
-$generator = setInterval(function(){
-  $obstacleGen($board.board);
-  $render();
-}, 200);
-
 // detects non-empty squares below apple before advancing row
 $collisionDetect = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
@@ -58,18 +39,46 @@ $collisionDetect = function(board) {
   return false;
 }
 
-$sideCollisionDetect = function(board) {
+$sideCollisionDetectRight = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
     if(board[0][i] === 'o' || board[0][i] === 'p'){
-      if(board[0][i-1] === 'b' || board[0][i+1] === 'b'){
-        $('.status').append('BONK!'+ '<br>')
-        if($lifeCount === 0){
-          $endOfGame();
-        } else {
-          $lifeCount--;
-        }
+      if(board[0][i+1] === 'b'){
+        $collisionHappened();
+        return true;
       }
     }
   }
   return false;
 }
+
+$sideCollisionDetectLeft = function(board) {
+  for(var i = 0; i < board[0].length; i++ ){
+    if(board[0][i] === 'o' || board[0][i] === 'p'){
+      if(board[0][i-1] === 'b'){
+        $collisionHappened();
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+$collisionHappened = function(){
+  $('.status').append('BONK!'+ '<br>')
+    if($lifeCount === 0){
+      $endOfGame();
+    } else {
+      $lifeCount--;
+    }
+};
+
+// set interval of advancement
+$advancer = setInterval(function(){
+  $obstacleAdvance($board.board);
+}, 300);
+
+// set interval of obstacle generation
+$generator = setInterval(function(){
+  $obstacleGen($board.board);
+  $render();
+}, 200);
