@@ -59,55 +59,28 @@ describe('movement', function(){
     b.moveLeft();
     expect(b.board[0][0]).to.equal('o');
 
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
-    b.moveRight();
+   b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();b.moveRight();
+   b.moveRight();
     expect(b.board[0][10]).to.equal('o');
     expect(b.board[0][0]).to.equal('x');
     
   });
-
-
 });
 
-  // describe("dance", function(){
-  //   it("should call step at least once per second", function(){
-  //     sinon.spy(blinkyDancer, "step");
-  //     expect(blinkyDancer.step.callCount).to.be.equal(0);
-  //     clock.tick(timeBetweenSteps);
-  //     clock.tick(timeBetweenSteps); // Why do we have a 2nd call?
+describe('collisions', function(){
 
-  //     expect(blinkyDancer.step.callCount).to.be.equal(1);
+  it('collisions with non-blank spaces should be detected', function(){
+    b = new BoardMaker(5,5);
+    b.board[0][0] = 'o';
+    b.board[4] = ['b','b','b','b','b']
+    expect($collisionDetect(b.board)).to.equal(false);
+    $obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
+    expect($collisionDetect(b.board)).to.equal(true);
 
-  //     clock.tick(timeBetweenSteps);
-  //     expect(blinkyDancer.step.callCount).to.be.equal(2);
-  //   });
-  // });
+  });
+});
+
+
 
 
 });
