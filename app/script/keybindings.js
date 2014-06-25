@@ -2,6 +2,7 @@ $(function(){
 
 $('body').on('keydown', function(e){
   if(e.keyCode === 39){ // right arrow
+    $sideCollisionDetect($board.board);
     $board.moveRight();
     $render();
   }
@@ -9,6 +10,7 @@ $('body').on('keydown', function(e){
 
 $('body').on('keydown', function(e){
   if(e.keyCode === 37){ // left arrow
+    $sideCollisionDetect($board.board);
     $board.moveLeft();
     $render();
   }

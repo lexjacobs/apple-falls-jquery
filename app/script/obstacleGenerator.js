@@ -22,10 +22,12 @@ $obstacleAdvance = function(board){
       $lifeCount--;
     }
   };
-  for (var i = 1; i < board.length-1; i++) {
+  for (var i = 0; i < board.length-1; i++) {
     for (var j = 0; j < board[i].length; j++) {
-      board[i][j] = board[i+1][j];
-      board[i+1][j] = 'x';
+      if(board[i][j] !== 'o' && board[i][j] !== 'p'){
+        board[i][j] = board[i+1][j];
+        board[i+1][j] = 'x';
+      }
     }
   }
   $render();
@@ -50,6 +52,22 @@ $collisionDetect = function(board) {
     if(board[0][i] === 'o' || board[0][i] === 'p'){
       if(board[1][i] !== 'x'){
         return true;
+      }
+    }
+  }
+  return false;
+}
+
+$sideCollisionDetect = function(board) {
+  for(var i = 0; i < board[0].length; i++ ){
+    if(board[0][i] === 'o' || board[0][i] === 'p'){
+      if(board[0][i-1] === 'b' || board[0][i+1] === 'b'){
+        $('.status').append('BONK!'+ '<br>')
+        if($lifeCount === 0){
+          $endOfGame();
+        } else {
+          $lifeCount--;
+        }
       }
     }
   }
