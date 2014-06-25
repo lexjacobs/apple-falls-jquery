@@ -1,3 +1,7 @@
+$parachuteCount = 1;
+$lifeCount = 3;
+$scoreCount = 0;
+
 $board = new BoardMaker(5,8);
 
 // place apple
@@ -28,6 +32,10 @@ $render = function(){
       }
     }
   }
+
+  $('.parachutes').text($parachuteCount);
+  $('.lives').text($lifeCount);
+  $('.score').text($scoreCount);
 }
 
 // initial rendering
@@ -35,3 +43,18 @@ $render();
 
 // end of document ready loop
 });
+
+$deploy = function(){
+  if($parachuteCount === 0){
+    return false;
+  }
+  $parachuteCount--;
+  $board.deploy();
+}
+
+$endOfGame = function(){
+  clearInterval($advancer);
+  clearInterval($generator); 
+  $('.status').text('GAME OVER!')
+
+}

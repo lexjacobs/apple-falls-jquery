@@ -16,6 +16,11 @@ $obstacleGen = function(board){
 $obstacleAdvance = function(board){
   if($collisionDetect(board)){
     $('.status').append('BONK!'+ '<br>')
+    if($lifeCount === 0){
+      $endOfGame();
+    } else {
+      $lifeCount--;
+    }
   };
   for (var i = 1; i < board.length-1; i++) {
     for (var j = 0; j < board[i].length; j++) {
@@ -24,6 +29,7 @@ $obstacleAdvance = function(board){
     }
   }
   $render();
+  $scoreCount += 10;
 };
 
 // set interval of advancement

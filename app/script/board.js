@@ -50,6 +50,7 @@ BoardMaker.prototype.deploy = function(){
  for(var i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] === 'o'){
       this.board[0][i] = 'p';
+      $deploy();
       break;
     }
   }

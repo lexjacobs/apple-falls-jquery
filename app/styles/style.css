@@ -19,6 +19,12 @@ right:0;
 top:0;
 }
 
+.vitals {
+position: absolute;
+left:0;
+top:0;
+}
+
 .spot {
   padding: 0px;
   margin: 0px;
