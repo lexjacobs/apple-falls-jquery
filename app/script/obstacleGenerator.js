@@ -15,7 +15,7 @@ $obstacleGen = function(board){
 // advances obstacles
 $obstacleAdvance = function(board){
   if($collisionDetect(board)){
-    console.log('bonk!');
+    $('.status').append('BONK!'+ '<br>')
   };
   for (var i = 1; i < board.length-1; i++) {
     for (var j = 0; j < board[i].length; j++) {
@@ -25,6 +25,12 @@ $obstacleAdvance = function(board){
   }
   $render();
 };
+
+// set interval of advancement
+$interval(function(){
+  $obstacleAdvance($board.board);
+}, 300);
+
 
 // set interval of obstacle generation once per second
 $interval(function(){
@@ -37,7 +43,6 @@ $collisionDetect = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
     if(board[0][i] === 'o'){
       if(board[1][i] !== 'x'){
-        // console.log('collision detected!');
         return true;
       }
     }

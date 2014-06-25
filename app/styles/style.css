@@ -3,6 +3,22 @@ body {
   font-family: courier;
 }
 
+.board {
+width: 118px;
+background-color: beige;
+border: dashed;
+border-width: 4px;
+padding: 8px;
+margin-left:40%;
+margin-right:60%;
+}
+
+.status {
+position: absolute;
+right:0;
+top:0;
+}
+
 .spot {
   border: dashed;
   padding: 0px;
@@ -17,3 +33,4 @@ body {
 .brick {
   background-color: red;
 }
+
