@@ -83,6 +83,7 @@
     $advancer = setTimeout(function(){
       $obstacleAdvance($board.board);
       $advanceIt();
+      $obstacleGen($board.board);
     }, $timeDecreaser.span());
 
   }
@@ -93,7 +94,7 @@
   $generator = setInterval(function(){
     $obstacleGen($board.board);
     $render();
-  }, 200);
+  }, 300);
 
   $('.status').text('');
 })();
