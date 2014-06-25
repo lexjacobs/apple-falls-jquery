@@ -14,7 +14,15 @@ $render = function(){
   for (var i = 0; i < $board.board.length; i++) {
     $('.board').append('<span class = "row'+i+'"></span><br>')
     for (var j = 0; j < $board.board[i].length; j++) {
-      $('.row'+i).append($board.board[i][j]);
+      if($board.board[i][j] === 'o'){
+        $('.row'+i).append('<span class = "apple">o</span>');
+      }
+      if($board.board[i][j] === 'x'){
+        $('.row'+i).append('<span class = "spot">+</span>');
+      }
+      if($board.board[i][j] === 'b'){
+        $('.row'+i).append('<span class = "brick">x</span>');
+      }
     }
   }
 }
