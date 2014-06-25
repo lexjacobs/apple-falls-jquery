@@ -71,14 +71,3 @@ $collisionHappened = function(){
       $lifeCount--;
     }
 };
-
-// set interval of advancement
-$advancer = setInterval(function(){
-  $obstacleAdvance($board.board);
-}, 300);
-
-// set interval of obstacle generation
-$generator = setInterval(function(){
-  $obstacleGen($board.board);
-  $render();
-}, 200);

@@ -15,6 +15,7 @@ margin-right:60%;
 
 .status {
 position: absolute;
+text-align: right;
 right:0;
 top:0;
 }

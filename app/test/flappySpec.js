@@ -1,13 +1,4 @@
-describe("flappyThings", function() {
-
-  // var flappy;
-  // var timeBetweenSteps = 100;
-  // var clock;
-
-  // beforeEach(function() {
-  //   clock = sinon.useFakeTimers();
-  //   blinkyDancer = new BlinkyDancer(10, 20, timeBetweenSteps);
-  // });
+describe("Apple Falls", function() {
 
 describe('board', function(){
   it('should make a board of the proper size', function(){
