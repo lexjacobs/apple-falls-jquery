@@ -18,7 +18,7 @@ $('body').on('keydown', function(e){
 
 $('body').on('keydown', function(e){
   if(e.keyCode === 32){ // space bar
-    $deploy();
+    $deploy($board);
   }
 })
 

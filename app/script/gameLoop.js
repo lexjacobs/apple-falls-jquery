@@ -1,4 +1,4 @@
-$parachuteCount = 1;
+$parachuteCount = 3;
 $lifeCount = 3;
 $scoreCount = 0;
 
@@ -44,12 +44,8 @@ $render();
 // end of document ready loop
 });
 
-$deploy = function(){
-  if($parachuteCount === 0){
-    return false;
-  }
-  $parachuteCount--;
-  $board.deploy();
+$deploy = function(board){
+  board.deploy();
 }
 
 $endOfGame = function(){

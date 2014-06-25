@@ -47,10 +47,30 @@ BoardMaker.prototype.moveLeft = function(){
 }
 
 BoardMaker.prototype.deploy = function(){
- for(var i = 0; i < this.board[0].length; i++){
+  if($parachuteCount === 0){
+    return false;
+  }
+ 
+  for(var i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] === 'o'){
       this.board[0][i] = 'p';
-      $deploy();
+
+      var that = this;
+      setTimeout(function(){
+        that.undeploy();
+      },3000);
+
+      $parachuteCount--;
+      break;
+    }
+  }
+  return false; 
+}
+
+BoardMaker.prototype.undeploy = function(){
+ for(var i = 0; i < this.board[0].length; i++){
+    if(this.board[0][i] === 'p'){
+      this.board[0][i] = 'o';
       break;
     }
   }
