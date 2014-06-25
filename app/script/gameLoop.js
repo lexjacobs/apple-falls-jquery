@@ -32,3 +32,7 @@ $render();
 $setter = function(callback, time){
   setTimeout(callback, time);
 };
+
+$interval = function(callback, time){
+  setInterval(callback, time);
+};
