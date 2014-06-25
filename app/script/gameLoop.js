@@ -1,7 +1,7 @@
 $board = new BoardMaker(5,8);
 
 // place apple
-$board.board[0][0] = '<span class = "spot">o</span>';
+$board.board[0][0] = $apple;
 
 $(function(){
 
@@ -9,8 +9,6 @@ $render = function(){
 
   // clear board at beginning of interval
   $('.board').text('');
-
-  $obstacleGen();
 
   // iterate through board and render each item found in arrays
   for (var i = 0; i < $board.board.length; i++) {
