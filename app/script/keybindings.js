@@ -16,7 +16,14 @@ $('body').on('keydown', function(e){
 
 $('body').on('keydown', function(e){
   if(e.keyCode === 32){
-    console.log('spaceBar');
+  }
+})
+
+$('body').on('keydown', function(e){
+  if(e.keyCode === 81){ // q
+    clearInterval($advancer);
+    clearInterval($generator);
+
   }
 })
 

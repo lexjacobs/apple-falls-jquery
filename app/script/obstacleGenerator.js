@@ -27,16 +27,16 @@ $obstacleAdvance = function(board){
 };
 
 // set interval of advancement
-$interval(function(){
+$advancer = setInterval(function(){
   $obstacleAdvance($board.board);
 }, 300);
 
 
 // set interval of obstacle generation once per second
-$interval(function(){
+$generator = setInterval(function(){
   $obstacleGen($board.board);
   $render();
-}, 1000);
+}, 200);
 
 // detects non-empty squares below apple before advancing row
 $collisionDetect = function(board) {

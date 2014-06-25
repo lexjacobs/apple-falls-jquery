@@ -32,13 +32,3 @@ $render();
 
 // end of document ready loop
 });
-
-
-// use for future gravity issues:
-$setter = function(callback, time){
-  setTimeout(callback, time);
-};
-
-$interval = function(callback, time){
-  setInterval(callback, time);
-};
