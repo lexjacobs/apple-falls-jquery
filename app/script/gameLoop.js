@@ -1,4 +1,4 @@
-$init = function(){
+($init = function(){
 
   $gameOn = true;
   $parachuteCount = 3;
@@ -8,7 +8,7 @@ $init = function(){
   $board = new BoardMaker(5,8);
 
   // place apple
-  $board.board[0][0] = 'o';
+  $board.board[0][Math.floor($board.board[0].length/2)] = 'o';
 
   $(function(){
 
@@ -58,10 +58,36 @@ $init = function(){
     $gameOn = false;
   }
 
+  // set up gravity simulation
+  $timeDecreaser = {
+    cache: [1000,900,800,700,600,500,400,300,250,200,150,140,130,120,110,100],
+    current: -1,
+    span: function(){
+      if(this.current < this.cache.length-1){
+        this.current++
+        return this.cache[this.current];
+      } else {
+        return this.cache[this.current];
+      }
+    }
+  };
+
   // set interval of advancement
-  $advancer = setInterval(function(){
-    $obstacleAdvance($board.board);
-  }, 300);
+
+  $advanceIt = function(){
+
+    if(!$gameOn){
+      return null;
+    }
+
+    $advancer = setTimeout(function(){
+      $obstacleAdvance($board.board);
+      $advanceIt();
+    }, $timeDecreaser.span());
+
+  }
+
+  $advanceIt()
 
   // set interval of obstacle generation
   $generator = setInterval(function(){
@@ -70,6 +96,4 @@ $init = function(){
   }, 200);
 
   $('.status').text('');
-}
-
-$init();
+})();
