@@ -1,21 +1,23 @@
 $(function(){
 
 $('body').on('keydown', function(e){
-  if(e.keyCode === 39){
+  if(e.keyCode === 39){ // right arrow
     $board.moveRight();
     $render();
   }
 })
 
 $('body').on('keydown', function(e){
-  if(e.keyCode === 37){
+  if(e.keyCode === 37){ // left arrow
     $board.moveLeft();
     $render();
   }
 })
 
 $('body').on('keydown', function(e){
-  if(e.keyCode === 32){
+  if(e.keyCode === 32){ // space bar
+    $board.deploy();
+    $render();
   }
 })
 

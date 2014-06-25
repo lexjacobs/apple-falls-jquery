@@ -21,6 +21,11 @@ BoardMaker.prototype.moveRight = function(){
       this.board[0][i+1] = 'o';
       break;
     }
+    if(this.board[0][i] === 'p' && i < this.board[0].length-1){
+      this.board[0][i] = 'x';
+      this.board[0][i+1] = 'p';
+      break;
+    }
   }
   return;
 }
@@ -32,6 +37,21 @@ BoardMaker.prototype.moveLeft = function(){
       this.board[0][i-1] = 'o';
       break;
     }
+    if(this.board[0][i] === 'p' && i !== 0){
+      this.board[0][i] = 'x';
+      this.board[0][i-1] = 'p';
+      break;
+    }
   }
   return;
+}
+
+BoardMaker.prototype.deploy = function(){
+ for(var i = 0; i < this.board[0].length; i++){
+    if(this.board[0][i] === 'o'){
+      this.board[0][i] = 'p';
+      break;
+    }
+  }
+  return true; 
 }

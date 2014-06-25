@@ -41,7 +41,7 @@ $generator = setInterval(function(){
 // detects non-empty squares below apple before advancing row
 $collisionDetect = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
-    if(board[0][i] === 'o'){
+    if(board[0][i] === 'o' || board[0][i] === 'p'){
       if(board[1][i] !== 'x'){
         return true;
       }

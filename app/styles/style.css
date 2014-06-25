@@ -28,10 +28,14 @@ top:0;
 }
 
 .brick {
-  background-color: black;
+  background-color: red;
 }
 
 .apple {
-  background-color: red;
+  background-color: green;
+}
+
+.parachute {
+  background-color: blue;
 }
 

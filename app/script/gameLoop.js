@@ -17,6 +17,9 @@ $render = function(){
       if($board.board[i][j] === 'o'){
         $('.row'+i).append('<span class = "apple">o</span>');
       }
+      if($board.board[i][j] === 'p'){
+        $('.row'+i).append('<span class = "parachute">p</span>');
+      }
       if($board.board[i][j] === 'x'){
         $('.row'+i).append('<span class = "spot">+</span>');
       }
