@@ -60,7 +60,7 @@
 
   // set up gravity simulation
   $timeDecreaser = {
-    cache: [700,700,600,650,600,500,400,300,250,200,150,140,130,120,110,100],
+    cache: [700,700,680,650,600,550,500,450,400,450,300,275,250,200,200,200,150,140,130,120,110,100],
     current: -1,
     span: function(){
       if(this.current < this.cache.length-1){
