@@ -1,7 +1,7 @@
 $board = new BoardMaker(5,8);
 
 // place apple
-$board.board[0][0] = $apple;
+$board.board[0][0] = 'o';
 
 $(function(){
 
