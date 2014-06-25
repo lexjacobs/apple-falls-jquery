@@ -10,6 +10,8 @@ $render = function(){
   // clear board at beginning of interval
   $('.board').text('');
 
+  $obstacleGen();
+
   // iterate through board and render each item found in arrays
   for (var i = 0; i < $board.board.length; i++) {
     $('.board').append('<span class = "row'+i+'"></span><br>')
@@ -27,10 +29,6 @@ $render();
 
 
 // use for future gravity issues:
-var setter = function(callback, time){
+$setter = function(callback, time){
   setTimeout(callback, time);
 };
-
-setter(function(){
-alert('hoboy');
-}, 1000);
