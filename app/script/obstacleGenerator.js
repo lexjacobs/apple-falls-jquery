@@ -1,3 +1,4 @@
+// generates bricks
 $obstacleGen = function(){
 
   var randomNumber = Math.random();
@@ -11,11 +12,13 @@ $obstacleGen = function(){
   }
 };
 
+// advances obstacles
 $obstacleAdvance = function(){
+  $collsionDetect();
   for (var i = 1; i < $board.board.length-1; i++) {
     for (var j = 0; j < $board.board[i].length; j++) {
       $board.board[i][j] = $board.board[i+1][j];
-      $board.board[i+1][j] = ['x'];
+      $board.board[i+1][j] = 'x';
     }
   }
   $render();
@@ -27,3 +30,13 @@ $interval(function(){
   $render();
 }, 1000);
 
+// detects non-empty squares below apple before advancing row
+$collsionDetect = function() {
+  for(var i = 0; i < $board.board[0].length; i++ ){
+    if($board.board[0][i] === 'o'){
+      if($board.board[1][i] !== 'x'){
+        console.log('collision detected!');
+      }
+    }
+  }
+}

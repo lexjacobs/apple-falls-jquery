@@ -8,7 +8,7 @@ var BoardMaker = function(nX, nY){
 
   for(var j = 0; j < this.board.length; j++){
     for(var k = 0; k < nX; k++){
-      this.board[j].push(['x']);
+      this.board[j].push('x');
     }
   }
 };
