@@ -75,7 +75,6 @@ describe('collisions', function(){
 
   });
 
-
   it('collisions with non-blank spaces should be detected', function(){
     b = new BoardMaker(5,5);
     b.board[0][0] = 'o';
@@ -83,6 +82,28 @@ describe('collisions', function(){
     expect($collisionDetect(b.board)).to.equal(false);
     $obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
     expect($collisionDetect(b.board)).to.equal(true);
+  });
+
+  it('side collisions with non-blank spaces should be detected', function(){
+    b = new BoardMaker(5,5);
+    b.board[0][2] = 'o';
+    b.board[1] = ['b','b','b','b','b']
+    expect($collisionDetect(b.board)).to.equal(true);
+    $obstacleAdvance(b.board);
+    expect($collisionDetect(b.board)).to.equal(false);
+    expect($sideCollisionDetectRight(b.board)).to.equal(true);
+    expect($sideCollisionDetectLeft(b.board)).to.equal(true);
+  });
+
+  it('collisions should be ignored when parachute is deployed', function(){
+    b = new BoardMaker(5,5);
+    b.board[0][2] = 'o';
+    b.deploy();
+    b.board[1] = ['b','b','b','b','b']
+    expect($collisionDetect(b.board)).to.equal(false);
+    $obstacleAdvance(b.board);
+    expect($sideCollisionDetectRight(b.board)).to.equal(false);
+    expect($sideCollisionDetectLeft(b.board)).to.equal(false);
   });
 
 

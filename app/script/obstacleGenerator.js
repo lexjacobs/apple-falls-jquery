@@ -12,7 +12,7 @@ $obstacleGen = function(board){
 
 // advances obstacles
 $obstacleAdvance = function(board){
-  if(!$deployed && $collisionDetect(board)){
+  if($collisionDetect(board)){
     $collisionHappened();
   };
   for (var i = 0; i < board.length-1; i++) {
@@ -30,7 +30,7 @@ $obstacleAdvance = function(board){
 // detects non-empty squares below apple before advancing row
 $collisionDetect = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
-    if(board[0][i] === 'o' || board[0][i] === 'p'){
+    if(board[0][i] === 'o' & board[0][i] !== 'p'){
       if(board[1][i] !== 'x'){
         return true;
       }
@@ -41,7 +41,7 @@ $collisionDetect = function(board) {
 
 $sideCollisionDetectRight = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
-    if(board[0][i] === 'o' || board[0][i] === 'p'){
+    if(board[0][i] === 'o' && board[0][i] !== 'p'){
       if(board[0][i+1] === 'b'){
         $collisionHappened();
         return true;
@@ -53,7 +53,7 @@ $sideCollisionDetectRight = function(board) {
 
 $sideCollisionDetectLeft = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
-    if(board[0][i] === 'o' || board[0][i] === 'p'){
+    if(board[0][i] === 'o' && board[0][i] !== 'p'){
       if(board[0][i-1] === 'b'){
         $collisionHappened();
         return true;
