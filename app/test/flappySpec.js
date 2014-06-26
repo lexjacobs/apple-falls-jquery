@@ -60,6 +60,7 @@ describe('movement', function(){
 
 describe('collisions', function(){
 
+<<<<<<< HEAD
   it('parchute should deploy and un-deploy', function(){
     b = new BoardMaker(5,5);
     b.board[0][0] = 'o';
@@ -75,6 +76,8 @@ describe('collisions', function(){
 
   });
 
+=======
+>>>>>>> parent of 4a8188f... Refactors to ignore collisions when parachute is deployed
   it('collisions with non-blank spaces should be detected', function(){
     b = new BoardMaker(5,5);
     b.board[0][0] = 'o';
@@ -82,6 +85,7 @@ describe('collisions', function(){
     expect($collisionDetect(b.board)).to.equal(false);
     $obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
     expect($collisionDetect(b.board)).to.equal(true);
+<<<<<<< HEAD
   });
 
   it('side collisions with non-blank spaces should be detected', function(){
@@ -106,7 +110,10 @@ describe('collisions', function(){
     expect($sideCollisionDetectLeft(b.board)).to.equal(false);
   });
 
+=======
+>>>>>>> parent of 4a8188f... Refactors to ignore collisions when parachute is deployed
 
+  });
 });
 
 
