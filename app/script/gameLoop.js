@@ -4,6 +4,7 @@
   $parachuteCount = 3;
   $lifeCount = 3;
   $scoreCount = 0;
+  $deployed = false;
 
   $board = new BoardMaker(5,8);
 

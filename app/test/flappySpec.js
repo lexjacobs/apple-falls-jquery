@@ -60,6 +60,22 @@ describe('movement', function(){
 
 describe('collisions', function(){
 
+  it('parchute should deploy and un-deploy', function(){
+    b = new BoardMaker(5,5);
+    b.board[0][0] = 'o';
+    // b.board[4] = ['b','b','b','b','b']
+    //expect($collisionDetect(b.board)).to.equal(false);
+    //$obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
+    //expect($collisionDetect(b.board)).to.equal(true);
+    b.deploy();
+    expect(b.board[0][0]).to.equal('p');
+    b.undeploy();
+    expect(b.board[0][0]).to.equal('o');
+    expect(b.board[0][1]).to.equal('x');
+
+  });
+
+
   it('collisions with non-blank spaces should be detected', function(){
     b = new BoardMaker(5,5);
     b.board[0][0] = 'o';
@@ -67,8 +83,9 @@ describe('collisions', function(){
     expect($collisionDetect(b.board)).to.equal(false);
     $obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
     expect($collisionDetect(b.board)).to.equal(true);
-
   });
+
+
 });
 
 

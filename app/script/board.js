@@ -62,6 +62,7 @@ BoardMaker.prototype.deploy = function(){
 
       $parachuteCount--;
       $timeDecreaser.current = 1;
+      $deployed = true;
       break;
     }
   }
@@ -72,6 +73,7 @@ BoardMaker.prototype.undeploy = function(){
  for(var i = 0; i < this.board[0].length; i++){
     if(this.board[0][i] === 'p'){
       this.board[0][i] = 'o';
+      $deployed = false;
       break;
     }
   }

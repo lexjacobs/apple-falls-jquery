@@ -12,7 +12,7 @@ $obstacleGen = function(board){
 
 // advances obstacles
 $obstacleAdvance = function(board){
-  if($collisionDetect(board)){
+  if(!$deployed && $collisionDetect(board)){
     $collisionHappened();
   };
   for (var i = 0; i < board.length-1; i++) {
