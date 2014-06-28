@@ -2,10 +2,10 @@
 
   $gameOn = true;
   $parachuteCount = 3;
-  $lifeCount = 9;
+  $lifeCount = 3;
   $scoreCount = 0;
 
-  $board = new BoardMaker(5,5);
+  $board = new BoardMaker(5,8);
 
   // place apple
   $board.board[0][Math.floor($board.board[0].length/2)] = 'o';
@@ -22,16 +22,16 @@
         $('.board').append('<span class = "row'+i+'"></span><br>')
         for (var j = 0; j < $board.board[i].length; j++) {
           if($board.board[i][j] === 'o'){
-            $('.row'+i).append('<span class = "apple">&nbsp;</span>');
+            $('.row'+i).append('<span class = "apple">o</span>');
           }
           if($board.board[i][j] === 'p'){
-            $('.row'+i).append('<span class = "parachute">&nbsp;</span>');
+            $('.row'+i).append('<span class = "parachute">p</span>');
           }
           if($board.board[i][j] === 'x'){
-            $('.row'+i).append('<span class = "spot">&nbsp;</span>');
+            $('.row'+i).append('<span class = "spot">|</span>');
           }
           if($board.board[i][j] === 'b'){
-            $('.row'+i).append('<span class = "brick">&nbsp;</span>');
+            $('.row'+i).append('<span class = "brick">+</span>');
           }
         }
       }
@@ -60,8 +60,8 @@
 
   // set up gravity simulation
   $timeDecreaser = {
-    // cache: [700,700,680,650,600,550,500,450,400,450,300,275,250,200,200,200,150],
-    cache: [700,700,680,650],
+    cache: [700,700,680,650,600,550,500,450,400,450,300,275,250,200,200,200,150],
+    // cache: [700,700,680,650],
     current: -1,
     span: function(){
       if(this.current < this.cache.length-1){

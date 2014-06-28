@@ -1,32 +1,34 @@
 $(function(){
 
-$('body').on('keydown', function(e){
-  if($gameOn){
-    if(e.keyCode === 39){ // right arrow
-      $sideCollisionDetectRight($board.board);
-      $board.moveRight();
-      $render();
-    }
+  $('body').on('keydown', function(e){
+    if($gameOn){
+      if(e.keyCode === 39){ // right arrow
+        $sideCollisionDetectRight($board.board);
+        $board.moveRight();
+        $render();
+      }
 
-    if(e.keyCode === 37){ // left arrow
-      $sideCollisionDetectLeft($board.board);
-      $board.moveLeft();
-      $render();
-    }
+      if(e.keyCode === 37){ // left arrow
+        $sideCollisionDetectLeft($board.board);
+        $board.moveLeft();
+        $render();
+      }
 
-    if(e.keyCode === 32){ // space bar
-      $deploy($board);
-    }
+      if(e.keyCode === 32){ // space bar
+        $deploy($board);
+      }
 
-    if(e.keyCode === 81){ // q
-      clearInterval($advancer);
-      clearInterval($generator);
-      $gameOn = false;
+      if(e.keyCode === 81){ // q
+        clearInterval($advancer);
+        clearInterval($generator);
+        $gameOn = false;
+      }
     }
-  }
-  if(!$gameOn){
-    if(e.keyCode === 83){ // s
-      $init();
+    if(!$gameOn){
+      if(e.keyCode === 83){ // s
+        $init();
+      }
     }
-  }
-})
+  });
+
+});
