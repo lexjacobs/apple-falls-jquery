@@ -13,7 +13,7 @@ Score is equal to distance fallen, and increases proportionally to the rate of d
 
 Gravity changers are multipliers that change the rate of acceleration as a multiple of *g*.
 
-Summary:
+Summary: (some features still in development)
 ===
 - Player controls an Apple
 - The Apple encounters random objects rising up from the ground
