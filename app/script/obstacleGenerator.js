@@ -25,7 +25,7 @@ $obstacleAdvance = function(board){
   }
   $render();
   $scoreCount += 100;
-  if($scoreCount % 200 === 0){
+  if($scoreCount % $bonusChuteMultiple === 0){
     $board.board[$board.board.length-2][Math.floor($board.board[0].length/2)] = 'e';
   }
 };

@@ -4,6 +4,7 @@
   $parachuteCount = 3;
   $lifeCount = 3;
   $scoreCount = 0;
+  $bonusChuteMultiple = 5000;
 
   $board = new BoardMaker(5,8);
 
@@ -61,7 +62,7 @@
   $endOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
-    $('.status').html('GAME OVER!<br>Press "s" to restart!');
+    $('.status').html('GAME OVER!<br>To restart:<br>Press "s"!');
     $gameOn = false;
   };
 
