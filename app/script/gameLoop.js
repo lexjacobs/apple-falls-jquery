@@ -33,6 +33,9 @@
           if($board.board[i][j] === 'b'){
             $('.row'+i).append('<span class = "brick">+</span>');
           }
+          if($board.board[i][j] === 'e'){
+            $('.row'+i).append('<span class = "bonusParachute">p</span>');
+          }
         }
       }
 
@@ -83,8 +86,8 @@
 
     $advancer = setTimeout(function(){
       $obstacleAdvance($board.board);
-      $advanceIt();
       $obstacleGen($board.board);
+      $advanceIt();
     }, $timeDecreaser.span());
 
   }

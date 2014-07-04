@@ -25,8 +25,8 @@ $obstacleAdvance = function(board){
   }
   $render();
   $scoreCount += 100;
-  if($scoreCount % 1000 === 0){
-    // $board.board[$board.board.length-1][Math.floor($board.board[0].length/2)] = 'o';
+  if($scoreCount % 200 === 0){
+    $board.board[$board.board.length-2][Math.floor($board.board[0].length/2)] = 'e';
   }
 };
 
