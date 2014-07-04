@@ -18,27 +18,34 @@
       // clear board at beginning of interval
       $('.board').text('');
 
-      // iterate through board and render each item found in arrays
+      // iterate through board and cache each item found in arrays
+      var freshBoard = '';
+
       for (var i = 0; i < $board.board.length; i++) {
-        $('.board').append('<span class = "row'+i+'"></span><br>')
+        freshBoard += '<span>';
+        
         for (var j = 0; j < $board.board[i].length; j++) {
           if($board.board[i][j] === 'o'){
-            $('.row'+i).append('<span class = "apple">o</span>');
+            freshBoard += '<span class = "apple">o</span>';
           }
           if($board.board[i][j] === 'p'){
-            $('.row'+i).append('<span class = "parachute">p</span>');
+            freshBoard += '<span class = "parachute">p</span>';
           }
           if($board.board[i][j] === 'x'){
-            $('.row'+i).append('<span class = "spot">|</span>');
+            freshBoard += '<span class = "spot">|</span>';
           }
           if($board.board[i][j] === 'b'){
-            $('.row'+i).append('<span class = "brick">+</span>');
+            freshBoard += '<span class = "brick">+</span>';
           }
           if($board.board[i][j] === 'e'){
-            $('.row'+i).append('<span class = "bonusParachute">p</span>');
+            freshBoard += '<span class = "bonusParachute">p</span>';
           }
         }
+        freshBoard += '</span><br>';
       }
+
+      // append cached board element to DOM
+      $('.board').html(freshBoard);
 
       $('.parachutes').text($parachuteCount);
       $('.lives').text($lifeCount);
