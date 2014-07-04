@@ -1,4 +1,4 @@
-describe("Apple Falls", function() {
+describe('Apple Falls', function() {
 
 describe('board', function(){
   it('should make a board of the proper size', function(){
@@ -13,7 +13,7 @@ describe('board', function(){
     b.board[0][0] = 'o';
 
     expect(b.board[0][0]).to.equal('o');
-  })
+  });
 
 });
 
@@ -78,7 +78,7 @@ describe('collisions', function(){
   it('collisions with non-blank spaces should be detected', function(){
     b = new BoardMaker(5,5);
     b.board[0][0] = 'o';
-    b.board[4] = ['b','b','b','b','b']
+    b.board[4] = ['b','b','b','b','b'];
     expect($collisionDetect(b.board)).to.equal(false);
     $obstacleAdvance(b.board);$obstacleAdvance(b.board);$obstacleAdvance(b.board);
     expect($collisionDetect(b.board)).to.equal(true);
@@ -87,7 +87,7 @@ describe('collisions', function(){
   it('side collisions with non-blank spaces should be detected', function(){
     b = new BoardMaker(5,5);
     b.board[0][2] = 'o';
-    b.board[1] = ['b','b','b','b','b']
+    b.board[1] = ['b','b','b','b','b'];
     expect($collisionDetect(b.board)).to.equal(true);
     $obstacleAdvance(b.board);
     expect($collisionDetect(b.board)).to.equal(false);
@@ -99,13 +99,32 @@ describe('collisions', function(){
     b = new BoardMaker(5,5);
     b.board[0][2] = 'o';
     b.deploy();
-    b.board[1] = ['b','b','b','b','b']
+    b.board[1] = ['b','b','b','b','b'];
     expect($collisionDetect(b.board)).to.equal(false);
     $obstacleAdvance(b.board);
     expect($sideCollisionDetectRight(b.board)).to.equal(false);
     expect($sideCollisionDetectLeft(b.board)).to.equal(false);
   });
 
-
+  it('bonus parachutes should increment counter upon collision', function(){
+    b = new BoardMaker(5,5);
+    b.board[0][2] = 'o';
+    $parachuteCount = 1;
+    b.board[1][2] = 'e';
+    expect($parachuteCount).to.equal(1);
+    $obstacleAdvance(b.board);
+    expect($parachuteCount).to.equal(2);
+    b.board[0][1] = 'e';
+    $sideCollisionDetectLeft(b.board);
+    expect($parachuteCount).to.equal(3);
+    b.board[0][1] = 'x';
+    b.board[0][0] = 'e';
+    $sideCollisionDetectLeft(b.board);
+    expect($parachuteCount).to.equal(3);
+    b.board[0][3] = 'e';
+    $sideCollisionDetectRight(b.board);
+    expect($parachuteCount).to.equal(4);
   });
+});
+
 });
