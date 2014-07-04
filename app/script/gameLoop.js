@@ -42,7 +42,7 @@
       $('.parachutes').text($parachuteCount);
       $('.lives').text($lifeCount);
       $('.score').text($scoreCount);
-    }
+    };
 
     // initial rendering
     $render();        
@@ -52,18 +52,18 @@
 
   $deploy = function(board){
     board.deploy();
-  }
+  };
 
   $bonusChuteAdder = function(){
     $parachuteCount++;
-  }
+  };
 
   $endOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
     $('.status').html('GAME OVER!<br>Press "s" to restart!');
     $gameOn = false;
-  }
+  };
 
   // set up gravity simulation
   $timeDecreaser = {
@@ -72,7 +72,7 @@
     current: -1,
     span: function(){
       if(this.current < this.cache.length-1){
-        this.current++
+        this.current++;
         return this.cache[this.current];
       } else {
         return this.cache[this.current];
@@ -94,9 +94,9 @@
       $advanceIt();
     }, $timeDecreaser.span());
 
-  }
+  };
 
-  $advanceIt()
+  $advanceIt();
 
   // set interval of obstacle generation
   $generator = setInterval(function(){

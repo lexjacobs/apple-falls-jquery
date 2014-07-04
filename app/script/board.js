@@ -28,7 +28,7 @@ BoardMaker.prototype.moveRight = function(){
     }
   }
   return;
-}
+};
 
 BoardMaker.prototype.moveLeft = function(){
   for(var i = 0; i < this.board[0].length; i++){
@@ -44,7 +44,7 @@ BoardMaker.prototype.moveLeft = function(){
     }
   }
   return;
-}
+};
 
 BoardMaker.prototype.deploy = function(){
   if($parachuteCount === 0){
@@ -66,7 +66,7 @@ BoardMaker.prototype.deploy = function(){
     }
   }
   return false; 
-}
+};
 
 BoardMaker.prototype.undeploy = function(){
  for(var i = 0; i < this.board[0].length; i++){
@@ -76,4 +76,4 @@ BoardMaker.prototype.undeploy = function(){
     }
   }
   return true; 
-}
+};
