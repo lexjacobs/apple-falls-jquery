@@ -54,6 +54,10 @@
     board.deploy();
   }
 
+  $bonusChuteAdder = function(){
+    $parachuteCount++;
+  }
+
   $endOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 

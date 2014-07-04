@@ -33,6 +33,12 @@ $obstacleAdvance = function(board){
 // detects non-empty squares below apple before advancing row
 $collisionDetect = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
+    if(board[0][i] === 'p' || board[0][i] === 'o'){
+      if(board[1][i] === 'e'){
+        $bonusChuteAdder();
+        return false;
+      }
+    }
     if(board[0][i] === 'o' && board[0][i] !== 'p'){
       if(board[1][i] !== 'x'){
         return true;
@@ -44,6 +50,12 @@ $collisionDetect = function(board) {
 
 $sideCollisionDetectRight = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
+    if(board[0][i] === 'p' || board[0][i] === 'o'){
+      if(board[0][i+1] === 'e'){
+        $bonusChuteAdder();
+        return false;
+      }
+    }
     if(board[0][i] === 'o' && board[0][i] !== 'p'){
       if(board[0][i+1] === 'b'){
         $collisionHappened();
@@ -55,7 +67,13 @@ $sideCollisionDetectRight = function(board) {
 }
 
 $sideCollisionDetectLeft = function(board) {
-  for(var i = 0; i < board[0].length; i++ ){
+  for(var i = 0; i < board[0].length; i++){
+    if(board[0][i] === 'p' || board[0][i] === 'o'){
+      if(board[0][i-1] === 'e'){
+        $bonusChuteAdder();
+        return false;
+      }
+    }
     if(board[0][i] === 'o' && board[0][i] !== 'p'){
       if(board[0][i-1] === 'b'){
         $collisionHappened();
