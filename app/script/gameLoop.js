@@ -5,6 +5,9 @@
   $lifeCount = 3;
   $scoreCount = 0;
   $bonusChuteMultiple = 5000;
+  $postHighScore = function(){
+    $('.highScore').text(localStorage['highScore']);
+  }
 
   $board = new BoardMaker(5,8);
 
@@ -12,6 +15,13 @@
   $board.board[0][Math.floor($board.board[0].length/2)] = 'o';
 
   $(function(){
+
+  $('.chuteMultiple').text($bonusChuteMultiple);
+  if(localStorage['highScore']){
+    $postHighScore();
+  } else {
+    $('.highScore').text('0');
+  }
 
     $render = function(){
 
@@ -71,6 +81,13 @@
     clearInterval($generator); 
     $('.status').html('GAME OVER!<br>To restart:<br>Press "s"!');
     $gameOn = false;
+    localStorage['date'] = new Date();
+    localStorage['lastScore'] = $scoreCount;
+    localStorage['highScore'] = localStorage['highScore'] || 0;
+    if(localStorage['highScore'] < $scoreCount){
+      localStorage['highScore'] = $scoreCount;
+    }
+    $postHighScore();
   };
 
   // set up gravity simulation
