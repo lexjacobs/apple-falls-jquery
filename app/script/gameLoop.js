@@ -25,14 +25,11 @@
 
     $render = function(){
 
-      // clear board at beginning of interval
-      $('.board').text('');
-
       // iterate through board and cache each item found in arrays
       var freshBoard = '';
 
       for (var i = 0; i < $board.board.length; i++) {
-        freshBoard += '<span>';
+        freshBoard += '<span class = "boardRow">';
         
         for (var j = 0; j < $board.board[i].length; j++) {
           if($board.board[i][j] === 'o'){
@@ -57,6 +54,7 @@
       // append cached board element to DOM
       $('.board').html(freshBoard);
 
+      // update dashboard with parachute/life/score count
       $('.parachutes').text($parachuteCount);
       $('.lives').text($lifeCount);
       $('.score').text($scoreCount);
