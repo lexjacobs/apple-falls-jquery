@@ -1,3 +1,10 @@
+@board-background: beige;
+@blank-spot: yellow;
+@brick: red;
+@apple: green;
+@parachute: blue;
+@bonus-chute: purple;
+
 body {
   font-size: 40px;
   font-family: courier;
@@ -5,7 +12,7 @@ body {
 
 .board {
   width: 118px;
-  background-color: beige;
+  background-color: @board-background;
   border: dashed;
   border-width: 4px;
   padding: 8px;
@@ -35,22 +42,22 @@ body {
   margin: 0px;
   width: 50px;
   height: 50px;
-  background-color: yellow;
+  background-color: @blank-spot;
 }
 
 .brick {
-  background-color: red;
+  background-color: @brick;
 }
 
 .apple {
-  background-color: green;
+  background-color: @apple;
 }
 
 .parachute {
-  background-color: blue;
+  background-color: @parachute;
 }
 
 .bonusParachute {
-  background-color: purple;
+  background-color: @bonus-chute;
   color: white;
 }
