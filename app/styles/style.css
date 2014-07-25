@@ -1,0 +1,47 @@
+body {
+  font-size: 40px;
+  font-family: courier;
+}
+.board {
+  width: 118px;
+  background-color: #f5f5dc;
+  border: dashed;
+  border-width: 4px;
+  padding: 8px;
+  margin-left: 40%;
+  margin-right: 60%;
+}
+.status {
+  position: absolute;
+  text-align: right;
+  right: 0;
+  top: 0;
+}
+.vitals {
+  position: absolute;
+  left: 5px;
+  top: 0;
+}
+.instructions {
+  font-size: 20px;
+}
+.spot {
+  padding: 0px;
+  margin: 0px;
+  width: 50px;
+  height: 50px;
+  background-color: #ffff00;
+}
+.brick {
+  background-color: #ff0000;
+}
+.apple {
+  background-color: #008000;
+}
+.parachute {
+  background-color: #0000ff;
+}
+.bonusParachute {
+  background-color: #800080;
+  color: white;
+}
