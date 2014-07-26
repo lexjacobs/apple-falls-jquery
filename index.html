@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Apple Falls</title>
-
-  <script src="app/script/jquery-2.1.1.min.js"></script>
-  <script src="app/script/board.js"></script>
-  <script src="app/script/gameLoop.js"></script>
-  <script src="app/script/gravity.js"></script>
-  <script src="app/script/obstacleGenerator.js"></script>
-  <script src="app/script/keybindings.js"></script>
-  <!-- <link rel="stylesheet/less" type="text/css" href="app/styles/style.less" /> -->
-  <link rel="stylesheet" type="text/css" href="app/styles/style.css" />
-  <!-- <script src="app/script/less-1.7.3.min.js" type="text/javascript"></script> -->
-
-
-</head>
-<body>
-
-<div class = "vitals">
-  parachutes: <span class = "parachutes"></span><br>
-  lives: <span class = "lives"></span><br>
-  score: <span class = "score"></span><br>
-  high: <span class ="highScore"></span>
-  <br><br>
-  controls:<br>
-<div class = "instructions">
-beware, brick-bats <span class = "brick">x</span> swarm!<br>
-move falling apple: <span class = "apple">o</span><br>
-press left / right arrows<br><br>
-deploy parachute (+immunity!): <span class = "parachute">p</span><br>
-press space-bar<br>
-bonus chute <span class = "bonusParachute">p</span> at <span class = "chuteMultiple"></span> points!
-</div>
-</div>  
-
-<div class = "board"></div>
-<div class = "status"></div>
-
-</body>
+  <head>
+    <title>Apple Falls</title>
+    <script src="app/script/jquery-2.1.1.min.js"></script>
+    <script src="app/script/board.js"></script>
+    <script src="app/script/gameLoop.js"></script>
+    <script src="app/script/gravity.js"></script>
+    <script src="app/script/obstacleGenerator.js"></script>
+    <script src="app/script/keybindings.js"></script>
+    <!-- <link rel="stylesheet/less" type="text/css" href="app/styles/style.less" /> -->
+    <link rel="stylesheet" type="text/css" href="app/styles/style.css" />
+    <!-- <script src="app/script/less-1.7.3.min.js" type="text/javascript"></script> -->
+  </head>
+  <body>
+    <div class = "container">
+      <div class = "vitals">
+        parachutes: <span class = "parachutes"></span><br>
+        lives: <span class = "lives"></span><br>
+        score: <span class = "score"></span><br>
+        high: <span class ="highScore"></span>
+        <br><br>
+        controls:<br>
+        <div class = "instructions">
+          beware branches! <span class = "brick">+</span><br>
+          move falling apple: <span class = "apple">o</span><br>
+          press left / right arrows<br><br>
+          deploy parachute (immunity!): <span class = "parachute">p</span><br>
+          press space-bar<br>
+          bonus chute <span class = "bonusParachute">p</span> at <span class = "chuteMultiple"></span> points!
+        </div>
+      </div>
+      <div class = "board">
+      </div>
+      <div class = "status"></div>
+    </div>
+    
+  </body>
 </html>
