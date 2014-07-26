@@ -1,47 +1,59 @@
 body {
   font-size: 40px;
-  font-family: courier;
+  font-family: monospace, courier;
+}
+.container {
+  position: relative;
+  background-color: #f5f5dc;
+  width: 575px;
+  height: 410px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  margin-top: 2%;
 }
 .board {
   width: 118px;
-  background-color: #f5f5dc;
-  border: dashed;
+  border: solid;
   border-width: 4px;
   padding: 8px;
-  margin-left: 40%;
-  margin-right: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .status {
   position: absolute;
   text-align: right;
-  right: 0;
-  top: 0;
+  right: 5px;
+  top: 5px;
+  font-family: sans-serif;
+  font-size: 20px;
 }
 .vitals {
   position: absolute;
   left: 5px;
-  top: 0;
+  top: 5px;
+  font-size: 20px;
+  font-family: sans-serif;
 }
 .instructions {
-  font-size: 20px;
+  font-size: 15px;
 }
 .spot {
   padding: 0px;
   margin: 0px;
   width: 50px;
   height: 50px;
-  background-color: #ffff00;
+  background-color: #a52a2a;
 }
 .brick {
-  background-color: #ff0000;
+  background-color: #90ee90;
 }
 .apple {
-  background-color: #008000;
+  background-color: #ff0000;
 }
 .parachute {
-  background-color: #0000ff;
+  background-color: #add8e6;
 }
 .bonusParachute {
-  background-color: #800080;
-  color: white;
+  background-color: #ffff00;
 }
