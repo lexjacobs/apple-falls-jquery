@@ -1,10 +1,11 @@
 body {
   font-size: 40px;
   font-family: monospace, courier;
+  background-color: #fff8dc;
 }
 .container {
   position: relative;
-  background-color: #f5f5dc;
+  background-color: #cd853f;
   width: 575px;
   height: 410px;
   margin-left: auto;
@@ -22,11 +23,12 @@ body {
 }
 .status {
   position: absolute;
-  text-align: right;
-  right: 5px;
+  text-align: left;
+  right: 83px;
   top: 5px;
   font-family: sans-serif;
   font-size: 20px;
+  float: left;
 }
 .vitals {
   position: absolute;

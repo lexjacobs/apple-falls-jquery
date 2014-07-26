@@ -1,4 +1,5 @@
-@board-background: beige;
+@background-color: cornsilk;
+@board-background: peru;
 @blank-spot: brown;
 @brick: lightgreen;
 @apple: red;
@@ -10,6 +11,7 @@
 body {
   font-size: @main-font-size;
   font-family: monospace, courier;
+  background-color: @background-color;
 }
 
 .container {
@@ -34,11 +36,12 @@ margin-top:2%;
 
 .status {
   position: absolute;
-  text-align: right;
-  right:5px;
-  top:5px;
+  text-align: left;
+  right: 83px;
+  top: 5px;
   font-family: sans-serif;
   font-size: @sub-font-size;
+  float: left;
 }
 
 .vitals {
