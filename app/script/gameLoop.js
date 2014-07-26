@@ -1,3 +1,5 @@
+$firstRun = true;
+
 ($init = function(){
 
   $gameOn = true;
@@ -85,14 +87,17 @@
       localStorage['highScore'] = $scoreCount;
     }
     $postHighScore();
-    $('.instructions').toggle(1000);
-    $('.instructions').prepend('GAME OVER!<br><br>');
+
+    if($firstRun){
+      $('.instructions').prepend('GAME OVER!<br><br>');
+      $firstRun = false;
+    }
+    $('.instructions').toggle(700);
   };
 
   $startOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
-    $('.instructions').prepend('To start game:<br>press "s"!<br><br>');
     $gameOn = false;
   };
 
