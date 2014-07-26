@@ -85,7 +85,7 @@
       localStorage['highScore'] = $scoreCount;
     }
     $postHighScore();
-    $('.instructions').toggle();
+    $('.instructions').toggle(500);
     $('.instructions').prepend('GAME OVER!<br><br>');
   };
 
