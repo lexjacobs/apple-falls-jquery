@@ -85,7 +85,11 @@ $sideCollisionDetectLeft = function(board) {
 }
 
 $collisionHappened = function(){
-  // $('.status').append('BONK!'+ '<br>');
+    $('.container').toggleClass('crashFlash');
+    setTimeout(function(){
+      $('.container').toggleClass('crashFlash');
+    },50);
+
     if($lifeCount === 0){
       $endOfGame();
     } else {

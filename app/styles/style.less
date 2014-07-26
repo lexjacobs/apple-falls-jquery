@@ -10,9 +10,9 @@
 @niceCurve: 13px; 
 
 body {
-  font-size: @main-font-size;
-  font-family: monospace, courier;
-  background-color: @background-color;
+font-size: @main-font-size;
+font-family: monospace, courier;
+background-color: @background-color;
 }
 
 .container {
@@ -28,101 +28,103 @@ border-radius: @niceCurve;
 }
 
 .board {
-  width: 118px;
-  border: solid;
-  border-width: 4px;
-  padding: 8px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top: 50px;
-  border-radius: @niceCurve;
-  position: absolute;
-  top: -10px;
-  left: 131px;
+width: 118px;
+border: solid;
+border-width: 4px;
+padding: 8px;
+margin-left:auto;
+margin-right:auto;
+margin-top: 50px;
+border-radius: @niceCurve;
+position: absolute;
+top: -10px;
+left: 131px;
 }
 
 .status {
-  position: absolute;
-  text-align: left;
-  right: 83px;
-  top: 5px;
-  font-family: sans-serif;
-  font-size: @sub-font-size;
-  float: left;
+position: absolute;
+text-align: left;
+right: 83px;
+top: 5px;
+font-family: sans-serif;
+font-size: @sub-font-size;
+float: left;
 }
 
 .vitals {
-  position: absolute;
-  left:108px;
-  top:5px;
-  font-size: @sub-font-size;
-  font-family: sans-serif;
+position: absolute;
+left:108px;
+top:5px;
+font-size: @sub-font-size;
+font-family: sans-serif;
 }
 
 .instructions {
-  font-size: 17px;
-  position: relative;
-  height: 416px;
-  width: 200px;
-  top: 27px;
-  left: 80px;
-  text-align: center;
-  background-color: darkkhaki;
-  border: solid;
-  padding: 6px;
-  border-radius: @niceCurve;
-  z-index: 1;
-
-
+font-size: 17px;
+position: relative;
+height: 416px;
+width: 200px;
+top: 27px;
+left: 80px;
+text-align: center;
+background-color: darkkhaki;
+border: solid;
+padding: 6px;
+border-radius: @niceCurve;
+z-index: 1;
 }
 
 .spot {
-  padding: 0px;
-  margin: 0px;
-  width: 50px;
-  height: 50px;
-  background-color: @blank-spot;
+padding: 0px;
+margin: 0px;
+width: 50px;
+height: 50px;
+background-color: @blank-spot;
 }
 
 .brick {
-  background-color: @brick;
+background-color: @brick;
 }
 
 .apple {
-  background-color: @apple;
+background-color: @apple;
 }
 
 .parachute {
-  background-color: @parachute;
+background-color: @parachute;
 }
 
 .bonusParachute {
-  background-color: @bonus-chute;
+background-color: @bonus-chute;
 }
 
 @buttonLeft: 86px;
 @buttonTop: 122px;
 .buttonL {
-  position: absolute;
-  top: @buttonTop;
-  left: @buttonLeft;
+position: absolute;
+top: @buttonTop;
+left: @buttonLeft;
 }
 
 .buttonR {
-  position: absolute;
-  top:@buttonTop;
-  left: @buttonLeft + 320px;
+position: absolute;
+top:@buttonTop;
+left: @buttonLeft + 320px;
 }
 
 .parachuteButton {
-  position: absolute;
-  top:@buttonTop + 120px;
-  left: @buttonLeft + 320px;
-  background-color: #cd853f;
+position: absolute;
+top:@buttonTop + 120px;
+left: @buttonLeft + 320px;
+background-color: #cd853f;
 }
 
 .githubBanner{
-  position: absolute;
-  top:0;
-  right:0;
+position: absolute;
+top:0;
+right:0;
+}
+
+.crashFlash {
+background-color: lighten(@board-background, 10);
 }
