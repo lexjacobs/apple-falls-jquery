@@ -42,21 +42,27 @@ $(function(){
     }
   });
 
-  $('.buttonL').on('click', function(){
+  $('.buttonL').on('click', function(event){
     if($gameOn){
       keyLeft();
+      event.stopPropagation();
+      event.preventDefault();
     }
   });
 
-  $('.buttonR').on('click', function(){
+  $('.buttonR').on('click', function(event){
     if($gameOn){
       keyRight();
+      event.stopPropagation();
+      event.preventDefault();
     }
   });
 
-  $('.parachuteButton').on('click', function(){
+  $('.parachuteButton').on('click', function(event){
     if($gameOn){
       $deploy($board);
+      event.stopPropagation();
+      event.preventDefault();
     }
   });
   
