@@ -86,7 +86,7 @@
     }
     $postHighScore();
     $('.instructions').toggle();
-    $('.instructions').prepend('GAME OVER!<br>To restart:<br>Press "s"!<br><br>');
+    $('.instructions').prepend('GAME OVER!<br><br>');
   };
 
   $startOfGame = function(){

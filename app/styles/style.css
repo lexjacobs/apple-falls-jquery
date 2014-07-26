@@ -12,6 +12,7 @@ body {
   margin-right: auto;
   padding: 5px;
   margin-top: 2%;
+  border-radius: 13px;
 }
 .board {
   width: 118px;
@@ -48,7 +49,7 @@ body {
   height: 416px;
   width: 200px;
   top: 27px;
-  left: 89px;
+  left: 80px;
   text-align: center;
   background-color: darkkhaki;
   border: solid;
