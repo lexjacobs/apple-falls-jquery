@@ -37,6 +37,7 @@ $(function(){
     }
     if(!$gameOn){
       if(e.keyCode === 83){ // s
+        $('.instructions').toggle();
         $init();
       }
     }

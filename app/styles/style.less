@@ -7,6 +7,7 @@
 @bonus-chute: yellow;
 @main-font-size: 40px;
 @sub-font-size: 20px;
+@niceCurve: 13px; 
 
 body {
   font-size: @main-font-size;
@@ -17,8 +18,8 @@ body {
 .container {
 position: relative;
 background-color: @board-background;
-width: 575px;
-height: 410px;
+width: 380px;
+height: 463px;
 margin-left: auto;
 margin-right: auto;
 padding: 5px;
@@ -32,6 +33,11 @@ margin-top:2%;
   padding: 8px;
   margin-left:auto;
   margin-right:auto;
+  margin-top: 50px;
+  border-radius: @niceCurve;
+  position: absolute;
+  top: -10px;
+  left: 131px;
 }
 
 .status {
@@ -46,17 +52,27 @@ margin-top:2%;
 
 .vitals {
   position: absolute;
-  left:5px;
+  left:108px;
   top:5px;
   font-size: @sub-font-size;
   font-family: sans-serif;
 }
 
 .instructions {
-  font-size: @sub-font-size - 5;
-  top: 142px;
+  font-size: 17px;
   position: relative;
-  left: 4px;
+  height: 416px;
+  width: 200px;
+  top: 27px;
+  left: 89px;
+  text-align: center;
+  background-color: darkkhaki;
+  border: solid;
+  padding: 6px;
+  border-radius: @niceCurve;
+  z-index: 1;
+
+
 }
 
 .spot {
@@ -102,4 +118,10 @@ margin-top:2%;
   top:@buttonTop + 120px;
   left: @buttonLeft + 320px;
   background-color: #cd853f;
+}
+
+.githubBanner{
+  position: absolute;
+  top:0;
+  right:0;
 }

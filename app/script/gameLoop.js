@@ -77,7 +77,6 @@
   $endOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
-    $('.status').html('GAME OVER!<br>To restart:<br>Press "s"!');
     $gameOn = false;
     localStorage['date'] = new Date();
     localStorage['lastScore'] = $scoreCount;
@@ -86,12 +85,14 @@
       localStorage['highScore'] = $scoreCount;
     }
     $postHighScore();
+    $('.instructions').toggle();
+    $('.instructions').prepend('GAME OVER!<br>To restart:<br>Press "s"!<br><br>');
   };
 
   $startOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
-    $('.status').html('To start game:<br>or press "s"!');
+    $('.instructions').prepend('To start game:<br>press "s"!<br><br>');
     $gameOn = false;
   };
 

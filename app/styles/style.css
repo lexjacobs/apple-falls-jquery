@@ -6,8 +6,8 @@ body {
 .container {
   position: relative;
   background-color: #cd853f;
-  width: 575px;
-  height: 410px;
+  width: 380px;
+  height: 463px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;
@@ -20,6 +20,11 @@ body {
   padding: 8px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
+  border-radius: 13px;
+  position: absolute;
+  top: -10px;
+  left: 131px;
 }
 .status {
   position: absolute;
@@ -32,16 +37,24 @@ body {
 }
 .vitals {
   position: absolute;
-  left: 5px;
+  left: 108px;
   top: 5px;
   font-size: 20px;
   font-family: sans-serif;
 }
 .instructions {
-  font-size: 15px;
-  top: 142px;
+  font-size: 17px;
   position: relative;
-  left: 4px;
+  height: 416px;
+  width: 200px;
+  top: 27px;
+  left: 89px;
+  text-align: center;
+  background-color: darkkhaki;
+  border: solid;
+  padding: 6px;
+  border-radius: 13px;
+  z-index: 1;
 }
 .spot {
   padding: 0px;
@@ -77,4 +90,9 @@ body {
   top: 242px;
   left: 406px;
   background-color: #cd853f;
+}
+.githubBanner {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

@@ -85,7 +85,7 @@ $sideCollisionDetectLeft = function(board) {
 }
 
 $collisionHappened = function(){
-  $('.status').append('BONK!'+ '<br>');
+  // $('.status').append('BONK!'+ '<br>');
     if($lifeCount === 0){
       $endOfGame();
     } else {
