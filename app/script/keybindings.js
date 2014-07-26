@@ -47,12 +47,17 @@ $(function(){
       keyLeft();
     }
   });
+
   $('.buttonR').on('click', function(){
     if($gameOn){
       keyRight();
     }
   });
+
+  $('.parachuteButton').on('click', function(){
+    if($gameOn){
+      $deploy($board);
+    }
+  });
   
-
-
 });

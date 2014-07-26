@@ -70,5 +70,11 @@ body {
 .buttonR {
   position: absolute;
   top: 122px;
-  left: 398px;
+  left: 406px;
+}
+.parachuteButton {
+  position: absolute;
+  top: 242px;
+  left: 406px;
+  background-color: #cd853f;
 }
