@@ -1,4 +1,4 @@
-[Deployed here](http://applefalls.azurewebsites.net/)
+Apple Falls is [Deployed here](http://applefalls.azurewebsites.net/). It is a browser game that requires a keyboard to interact with the controls. It will not work on mobile devices at this time.
 
 #Apple-Falls
 
