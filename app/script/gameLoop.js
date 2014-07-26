@@ -91,10 +91,7 @@
   $startOfGame = function(){
     clearInterval($advancer);
     clearInterval($generator); 
-    $('.status').html('To start game:<br>Click here,<br>or press "s"!');
-    $('.status').on('click', function(){
-      $init();
-    });
+    $('.status').html('To start game:<br>or press "s"!');
     $gameOn = false;
   };
 

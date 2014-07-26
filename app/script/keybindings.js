@@ -42,17 +42,4 @@ $(function(){
     }
   });
 
-  $('.buttonL').on('click', function(){
-    if($gameOn){
-      keyLeft();
-    }
-  });
-  $('.buttonR').on('click', function(){
-    if($gameOn){
-      keyRight();
-    }
-  });
-  
-
-
 });
