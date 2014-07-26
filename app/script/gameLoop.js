@@ -88,6 +88,18 @@
     $postHighScore();
   };
 
+  $startOfGame = function(){
+    clearInterval($advancer);
+    clearInterval($generator); 
+    $('.status').html('To start game:<br>Click here,<br>or press "s"!');
+    $('.status').on('click', function(){
+      $init();
+    });
+    $gameOn = false;
+  };
+
+
+
   // set up gravity simulation
   $timeDecreaser = {
     cache: [750,700,680,650,600,550,500,450,400,350,300,275,250,200,200,200,150],

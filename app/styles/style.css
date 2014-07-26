@@ -39,6 +39,9 @@ body {
 }
 .instructions {
   font-size: 15px;
+  top: 142px;
+  position: relative;
+  left: 4px;
 }
 .spot {
   padding: 0px;
@@ -58,4 +61,14 @@ body {
 }
 .bonusParachute {
   background-color: #ffff00;
+}
+.buttonL {
+  position: absolute;
+  top: 122px;
+  left: 86px;
+}
+.buttonR {
+  position: absolute;
+  top: 122px;
+  left: 398px;
 }

@@ -1,17 +1,28 @@
+var keyRight = function(){
+  $sideCollisionDetectRight($board.board);
+  $board.moveRight();
+  $render();          
+};
+
+var keyLeft = function(){
+  $sideCollisionDetectLeft($board.board);
+  $board.moveLeft();
+  $render();
+};
+
 $(function(){
+
+  // sets initial state so that user must initiate game with 's' or click
+  $startOfGame();
 
   $('body').on('keydown', function(e){
     if($gameOn){
       if(e.keyCode === 39){ // right arrow
-        $sideCollisionDetectRight($board.board);
-        $board.moveRight();
-        $render();
+        keyRight();
       }
 
       if(e.keyCode === 37){ // left arrow
-        $sideCollisionDetectLeft($board.board);
-        $board.moveLeft();
-        $render();
+        keyLeft();
       }
 
       if(e.keyCode === 32){ // space bar
@@ -30,5 +41,18 @@ $(function(){
       }
     }
   });
+
+  $('.buttonL').on('click', function(){
+    if($gameOn){
+      keyLeft();
+    }
+  });
+  $('.buttonR').on('click', function(){
+    if($gameOn){
+      keyRight();
+    }
+  });
+  
+
 
 });

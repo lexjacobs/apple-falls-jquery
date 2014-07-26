@@ -54,6 +54,9 @@ margin-top:2%;
 
 .instructions {
   font-size: @sub-font-size - 5;
+  top: 142px;
+  position: relative;
+  left: 4px;
 }
 
 .spot {
@@ -80,3 +83,16 @@ margin-top:2%;
   background-color: @bonus-chute;
 }
 
+@buttonLeft: 86px;
+@buttonTop: 122px;
+.buttonL {
+  position: absolute;
+  top: @buttonTop;
+  left: @buttonLeft;
+}
+
+.buttonR {
+  position: absolute;
+  top:@buttonTop;
+  left: @buttonLeft + 312px;
+}
