@@ -107,7 +107,7 @@ $firstRun = true;
   $timeDecreaser = {
     cache: [750,700,680,650,600,550,500,450,400,350,300,275,250,200,200,200,150],
     // cache: [700,700,680,650],
-    current: -1,
+    current: 4,
     span: function(){
       if(this.current < this.cache.length-1){
         this.current++;
