@@ -3,20 +3,22 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: ['app/script/*.js'],
+        dest: '<%= pkg.name %>.js'
+      }
+    },
     less: {
-      production: {
-        options: {
-          paths: ["assets/css"],
-          compress: true,
-          cleancss: false,
-          modifyVars: {
-            imgPath: '"http://mycdn.com/path/to/images"',
-            bgColor: 'red'
-          }
-        },
-        files: {
-          "app/styles/style.css": "app/styles/style.less"
-        }
+      options: {
+        compress: true,
+        cleancss: false
+      },
+      files: {
+        "app/styles/style.css": "app/styles/style.less"
       }
     },
 
@@ -27,9 +29,11 @@ module.exports = function(grunt) {
 
   });
 
-grunt.loadNpmTasks('grunt-contrib-less');
-grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
-grunt.registerTask('default', ['less']);
+  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('con', ['concat']);
 
 };
