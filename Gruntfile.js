@@ -5,26 +5,44 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       options: {
-        separator: ';'
+        separator: '\n'
       },
       dist: {
         src: ['app/script/*.js'],
         dest: '<%= pkg.name %>.js'
       }
     },
-    less: {
+    uglify: {
       options: {
-        compress: true,
-        cleancss: false
+        // the banner is inserted at the top of the output
+        banner: '/*! <%= pkg.name %>, now 83% smaller! <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
       },
-      files: {
-        "app/styles/style.css": "app/styles/style.less"
+      dist: {
+        files: {
+          '<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
       }
     },
-
+    less: {
+      development: {
+        options: {
+          compress: true,
+          cleancss: false
+        },
+        files: {
+          "app/styles/style.css": "app/styles/style.less"
+        }
+      }
+    },
     watch: {
-      files: ['app/styles/style.less'],
-      tasks: ['less'],
+      js: {
+        files: ['app/styles/style.less'],
+        tasks: ['css-smash']
+      },
+      styles: {
+        files: ['app/script/*.js'],
+        tasks: ['concat', 'uglify']
+      }
     }
 
   });
@@ -32,8 +50,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('con', ['concat']);
+  grunt.registerTask('css-smash', ['less']);
 
 };

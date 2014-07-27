@@ -46,7 +46,7 @@ $collisionDetect = function(board) {
     }
   }
   return false;
-}
+};
 
 $sideCollisionDetectRight = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
@@ -64,7 +64,7 @@ $sideCollisionDetectRight = function(board) {
     }
   }
   return false;
-}
+};
 
 $sideCollisionDetectLeft = function(board) {
   for(var i = 0; i < board[0].length; i++){
@@ -82,7 +82,7 @@ $sideCollisionDetectLeft = function(board) {
     }
   }
   return false;
-}
+};
 
 $collisionHappened = function(){
     $('.container').toggleClass('crashFlash');

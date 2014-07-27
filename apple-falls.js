@@ -76,7 +76,8 @@ BoardMaker.prototype.undeploy = function(){
     }
   }
   return true; 
-};;$firstRun = true;
+};
+$firstRun = true;
 
 ($init = function(){
 
@@ -221,7 +222,8 @@ BoardMaker.prototype.undeploy = function(){
   }, 300);
 
   $('.status').text('');
-})();;// http://www.gravitycalc.com/
+})();
+// http://www.gravitycalc.com/
 
 var FallingObject = function(height, g){
 
@@ -242,7 +244,8 @@ var FallingObject = function(height, g){
   };
 
 };
-;var keyRight = function(){
+
+var keyRight = function(){
   $sideCollisionDetectRight($board.board);
   $board.moveRight();
   $render();          
@@ -289,7 +292,8 @@ $(function(){
   });
 
 });
-;// generates bricks
+
+// generates bricks
 $obstacleGen = function(board){
   var randomNumber = Math.random();
   // generates obstacles in the first row
@@ -337,7 +341,7 @@ $collisionDetect = function(board) {
     }
   }
   return false;
-}
+};
 
 $sideCollisionDetectRight = function(board) {
   for(var i = 0; i < board[0].length; i++ ){
@@ -355,7 +359,7 @@ $sideCollisionDetectRight = function(board) {
     }
   }
   return false;
-}
+};
 
 $sideCollisionDetectLeft = function(board) {
   for(var i = 0; i < board[0].length; i++){
@@ -373,7 +377,7 @@ $sideCollisionDetectLeft = function(board) {
     }
   }
   return false;
-}
+};
 
 $collisionHappened = function(){
     $('.container').toggleClass('crashFlash');
