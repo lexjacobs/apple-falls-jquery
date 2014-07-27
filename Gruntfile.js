@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['app/styles/style.less'],
-        tasks: ['css-smash']
+        tasks: ['less']
       },
       styles: {
         files: ['app/script/*.js'],
@@ -51,8 +51,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('css-smash', ['less']);
-
 };

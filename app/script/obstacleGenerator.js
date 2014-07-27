@@ -14,7 +14,7 @@ $obstacleGen = function(board){
 $obstacleAdvance = function(board){
   if($collisionDetect(board)){
     $collisionHappened();
-  };
+  }
   for (var i = 0; i < board.length-1; i++) {
     for (var j = 0; j < board[i].length; j++) {
       if(board[i][j] !== 'o' && board[i][j] !== 'p'){
