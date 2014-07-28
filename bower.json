@@ -1,14 +1,14 @@
 {
   "name": "apple-falls",
   "version": "0.0.1",
-  "homepage": "https://github.com/lexjacobs/flappy-thing",
+  "homepage": "https://github.com/lexjacobs/apple-falls/",
   "authors": [
     "lexjacobs <lex.jacobs@gmail.com>"
   ],
   "description": "Exploring gravity",
   "main": "index.html",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -20,8 +20,6 @@
   "dependencies": {
     "chai": "~1.9.1",
     "mocha": "~1.20.1",
-    "sinon": "~1.10.2",
-    "jquery": "~2.1.1",
-    "less": "~1.7.3"
+    "sinon": "~1.10.2"
   }
 }
