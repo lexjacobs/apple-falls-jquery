@@ -318,8 +318,8 @@ $obstacleAdvance = function(board){
       }
     }
   }
-  $render();
   $scoreCount += 100;
+  $render();
   if($scoreCount % $bonusChuteMultiple === 0){
     $board.board[$board.board.length-2][Math.floor(Math.random() * $board.board[0].length)] = 'e';
   }
