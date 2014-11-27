@@ -1,146 +1,141 @@
 $firstRun = true;
 
-($init = function(){
+$init = function() {
 
-  $gameOn = true;
-  $parachuteCount = 3;
-  $lifeCount = 3;
-  $scoreCount = 0;
-  $bonusChuteMultiple = 5000;
-  $postHighScore = function(){
-    $('.highScore').text(localStorage['highScore']);
-  }
-
-  $board = new BoardMaker(5,8);
-
-  // place apple
-  $board.board[0][Math.floor($board.board[0].length/2)] = 'o';
-
-  $(function(){
-
-  $('.chuteMultiple').text($bonusChuteMultiple);
-  if(localStorage['highScore']){
-    $postHighScore();
-  } else {
-    $('.highScore').text('0');
-  }
-
-    $render = function(){
-
-      // iterate through board and cache each item found in arrays
-      var freshBoard = '';
-
-      for (var i = 0; i < $board.board.length; i++) {
-        freshBoard += '<span class = "boardRow">';
-        
-        for (var j = 0; j < $board.board[i].length; j++) {
-          if($board.board[i][j] === 'o'){
-            freshBoard += '<span class = "apple">o</span>';
-          }
-          if($board.board[i][j] === 'p'){
-            freshBoard += '<span class = "parachute">p</span>';
-          }
-          if($board.board[i][j] === 'x'){
-            freshBoard += '<span class = "spot">|</span>';
-          }
-          if($board.board[i][j] === 'b'){
-            freshBoard += '<span class = "brick">+</span>';
-          }
-          if($board.board[i][j] === 'e'){
-            freshBoard += '<span class = "bonusParachute">p</span>';
-          }
-        }
-        freshBoard += '</span><br>';
-      }
-
-      // append cached board element to DOM
-      $('.board').html(freshBoard);
-
-      // update dashboard with parachute/life/score count
-      $('.parachutes').text($parachuteCount);
-      $('.lives').text($lifeCount);
-      $('.score').text($scoreCount);
+    $gameOn = true;
+    $parachuteCount = 3;
+    $lifeCount = 3;
+    $scoreCount = 0;
+    $bonusChuteMultiple = 5000;
+    $postHighScore = function() {
+        $('.highScore').text(localStorage.getItem('highScore'));
     };
 
-    // initial rendering
-    $render();        
+    $board = new BoardMaker(5, 8);
 
-  // end of document ready loop
-  });
+    // place apple
+    $board.board[0][Math.floor($board.board[0].length / 2)] = 'o';
 
-  $deploy = function(board){
-    board.deploy();
-  };
+    $(function() {
 
-  $bonusChuteAdder = function(){
-    $parachuteCount++;
-  };
+        $('.chuteMultiple').text($bonusChuteMultiple);
+        if (localStorage.getItem('highScore')) {
+            $postHighScore();
+        } else {
+            $('.highScore').text('0');
+        }
 
-  $endOfGame = function(){
-    clearInterval($advancer);
-    clearInterval($generator); 
-    $gameOn = false;
-    localStorage['date'] = new Date();
-    localStorage['lastScore'] = $scoreCount;
-    localStorage['highScore'] = localStorage['highScore'] || 0;
-    if(localStorage['highScore'] < $scoreCount){
-      localStorage['highScore'] = $scoreCount;
-    }
-    $postHighScore();
+        $render = function() {
 
-    if($firstRun){
-      $('.instructions').prepend('GAME OVER!<br><br>');
-      $firstRun = false;
-    }
-    $('.instructions').toggle(700);
-  };
+            // iterate through board and cache each item found in arrays
+            var freshBoard = '';
 
-  $startOfGame = function(){
-    clearInterval($advancer);
-    clearInterval($generator); 
-    $gameOn = false;
-  };
+            for (var i = 0; i < $board.board.length; i++) {
+                freshBoard += '<span class = "boardRow">';
 
+                for (var j = 0; j < $board.board[i].length; j++) {
+                    if ($board.board[i][j] === 'o') {
+                        freshBoard += '<span class = "apple">o</span>';
+                    }
+                    if ($board.board[i][j] === 'p') {
+                        freshBoard += '<span class = "parachute">p</span>';
+                    }
+                    if ($board.board[i][j] === 'x') {
+                        freshBoard += '<span class = "spot">|</span>';
+                    }
+                    if ($board.board[i][j] === 'b') {
+                        freshBoard += '<span class = "brick">+</span>';
+                    }
+                    if ($board.board[i][j] === 'e') {
+                        freshBoard += '<span class = "bonusParachute">p</span>';
+                    }
+                }
+                freshBoard += '</span><br>';
+            }
 
+            // append cached board element to DOM
+            $('.board').html(freshBoard);
 
-  // set up gravity simulation
-  $timeDecreaser = {
-    cache: [750,700,680,650,600,550,500,450,400,350,300,275,250,200,200,200,150],
-    // cache: [700,700,680,650],
-    current: 4,
-    span: function(){
-      if(this.current < this.cache.length-1){
-        this.current++;
-        return this.cache[this.current];
-      } else {
-        return this.cache[this.current];
-      }
-    }
-  };
+            // update dashboard with parachute/life/score count
+            $('.parachutes').text($parachuteCount);
+            $('.lives').text($lifeCount);
+            $('.score').text($scoreCount);
+        };
 
-  // set interval of advancement
+        // initial rendering
+        $render();
 
-  $advanceIt = function(){
+        // end of document ready loop
+    });
 
-    if(!$gameOn){
-      return null;
-    }
+    $deploy = function(board) {
+        board.deploy();
+    };
 
-    $advancer = setTimeout(function(){
-      $obstacleAdvance($board.board);
-      $obstacleGen($board.board);
-      $advanceIt();
-    }, $timeDecreaser.span());
+    $bonusChuteAdder = function() {
+        $parachuteCount++;
+    };
 
-  };
+    $endOfGame = function() {
+        clearInterval($advancer);
+        clearInterval($generator);
+        $gameOn = false;
+        localStorage.setItem('date', new Date());
+        localStorage.setItem('lastScore', $scoreCount);
+        if (localStorage.getItem('highScore') === null) {
+            localStorage.setItem('highScore', 0);
+        }
+        if (localStorage.getItem('highScore') < $scoreCount) {
+            localStorage.setItem('highScore', $scoreCount);
+        }
+        $postHighScore();
 
-  $advanceIt();
+        if ($firstRun) {
+            $('.instructions').prepend('GAME OVER!<br><br>');
+            $firstRun = false;
+        }
+        $('.instructions').toggle(700);
+    };
 
-  // set interval of obstacle generation
-  $generator = setInterval(function(){
-    $obstacleGen($board.board);
-    $render();
-  }, 300);
+    $startOfGame = function() {
+        clearInterval($advancer);
+        clearInterval($generator);
+        $gameOn = false;
+    };
 
-  $('.status').text('');
-})();
+    // set up gravity simulation
+    $timeDecreaser = {
+        cache: [750, 700, 680, 650, 600, 550, 500, 450, 400, 350, 300, 275, 250, 200, 200, 200, 150],
+        current: 4,
+        span: function() {
+            if (this.current < this.cache.length - 1) {
+                this.current++;
+            }
+            return this.cache[this.current];
+        }
+    };
+
+    // set interval of advancement
+    $advanceIt = function() {
+
+        if (!$gameOn) {
+            return null;
+        }
+        $advancer = setTimeout(function() {
+            $obstacleAdvance($board.board);
+            $obstacleGen($board.board);
+            $advanceIt();
+        }, $timeDecreaser.span());
+
+    };
+    $advanceIt();
+
+    // set interval of obstacle generation
+    $generator = setInterval(function() {
+        $obstacleGen($board.board);
+        $render();
+    }, 300);
+
+    $('.status').text('');
+};
+$init();

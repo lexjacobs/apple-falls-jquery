@@ -1,11 +1,9 @@
 var BoardMaker = function(nX, nY) {
-
     this.board = [];
 
     for (var i = 0; i < nY; i++) {
         this.board.push([]);
     }
-
     for (var j = 0; j < this.board.length; j++) {
         for (var k = 0; k < nX; k++) {
             this.board[j].push('x');
