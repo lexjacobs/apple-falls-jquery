@@ -1,43 +1,65 @@
 var BoardMaker = function(nX, nY) {
+    this.row = nX;
+    this.col = nY;
     this.board = [];
+    this.primeBoard(this.board, this.row, this.col);
 
-    for (var i = 0; i < nY; i++) {
-        this.board.push([]);
-    }
-    for (var j = 0; j < this.board.length; j++) {
-        for (var k = 0; k < nX; k++) {
-            this.board[j].push('x');
-        }
-    }
+    this.$gameOn = true;
+    this.$parachuteCount = 3;
+    this.$lifeCount = 3;
+    this.$scoreCount = 0;
+    this.$bonusChuteMultiple = 1000;
+
 };
 
-BoardMaker.prototype.moveRight = function() {
-    for (var i = 0; i < this.board[0].length; i++) {
+BoardMaker.prototype.$bonusChuteAdder = function() {
+    this.$parachuteCount++;
+};
 
-        if (this.board[0][i] === 'o' && i < this.board[0].length - 1) {
-            this.board[0][i] = 'x';
-            this.board[0][i + 1] = 'o';
+BoardMaker.prototype.placeApple = function() {
+    this.board[0][Math.floor(this.board[0].length / 2)] = 'o';
+
+};
+
+BoardMaker.prototype.primeBoard = function(board, row, col) {
+    for (var i = 0; i < col; i++) {
+        board.push([]);
+    }
+    for (var j = 0; j < this.board.length; j++) {
+        for (var k = 0; k < row; k++) {
+            board[j].push('x');
+        }
+    }
+    return;
+};
+
+BoardMaker.prototype.moveRight = function(board) {
+    for (var i = 0; i < board[0].length; i++) {
+
+        if (board[0][i] === 'o' && i < board[0].length - 1) {
+            board[0][i] = 'x';
+            board[0][i + 1] = 'o';
             break;
         }
-        if (this.board[0][i] === 'p' && i < this.board[0].length - 1) {
-            this.board[0][i] = 'x';
-            this.board[0][i + 1] = 'p';
+        if (board[0][i] === 'p' && i < board[0].length - 1) {
+            board[0][i] = 'x';
+            board[0][i + 1] = 'p';
             break;
         }
     }
     return;
 };
 
-BoardMaker.prototype.moveLeft = function() {
-    for (var i = 0; i < this.board[0].length; i++) {
-        if (this.board[0][i] === 'o' && i !== 0) {
-            this.board[0][i] = 'x';
-            this.board[0][i - 1] = 'o';
+BoardMaker.prototype.moveLeft = function(board) {
+    for (var i = 0; i < board[0].length; i++) {
+        if (board[0][i] === 'o' && i !== 0) {
+            board[0][i] = 'x';
+            board[0][i - 1] = 'o';
             break;
         }
-        if (this.board[0][i] === 'p' && i !== 0) {
-            this.board[0][i] = 'x';
-            this.board[0][i - 1] = 'p';
+        if (board[0][i] === 'p' && i !== 0) {
+            board[0][i] = 'x';
+            board[0][i - 1] = 'p';
             break;
         }
     }
@@ -46,14 +68,13 @@ BoardMaker.prototype.moveLeft = function() {
 
 BoardMaker.prototype.deploy = function() {
     var timeoutFlag = false;
-    if ($parachuteCount === 0) {
+    if (this.$parachuteCount === 0) {
         return false;
     }
     for (var i = 0; i < this.board[0].length; i++) {
         if (this.board[0][i] === 'o') {
             this.board[0][i] = 'p';
-            $parachuteCount--;
-            $timeDecreaser.current = 1;
+            this.$parachuteCount--;
             timeoutFlag = true;
             break;
         }
@@ -77,192 +98,49 @@ BoardMaker.prototype.undeploy = function() {
     return true;
 };
 
-$firstRun = true;
+BoardMaker.prototype.$render = function(board) {
 
-$init = function() {
+    // iterate through board and cache each item found in arrays
+    var freshBoard = '';
 
-    $gameOn = true;
-    $parachuteCount = 3;
-    $lifeCount = 3;
-    $scoreCount = 0;
-    $bonusChuteMultiple = 5000;
+    for (var i = 0; i < this.board.length; i++) {
+        freshBoard += '<span class = "boardRow">';
 
-    $board = new BoardMaker(5, 8);
-
-    // place apple
-    $board.board[0][Math.floor($board.board[0].length / 2)] = 'o';
-
-    $(function() {
-
-        $('.chuteMultiple').text($bonusChuteMultiple);
-        $postHighScore();
-
-        $render = function() {
-
-            // iterate through board and cache each item found in arrays
-            var freshBoard = '';
-
-            for (var i = 0; i < $board.board.length; i++) {
-                freshBoard += '<span class = "boardRow">';
-
-                for (var j = 0; j < $board.board[i].length; j++) {
-                    if ($board.board[i][j] === 'o') {
-                        freshBoard += '<span class = "apple">o</span>';
-                    }
-                    if ($board.board[i][j] === 'p') {
-                        freshBoard += '<span class = "parachute">p</span>';
-                    }
-                    if ($board.board[i][j] === 'x') {
-                        freshBoard += '<span class = "spot">|</span>';
-                    }
-                    if ($board.board[i][j] === 'b') {
-                        freshBoard += '<span class = "brick">+</span>';
-                    }
-                    if ($board.board[i][j] === 'e') {
-                        freshBoard += '<span class = "bonusParachute">p</span>';
-                    }
-                }
-                freshBoard += '</span><br>';
+        for (var j = 0; j < this.board[i].length; j++) {
+            if (this.board[i][j] === 'o') {
+                freshBoard += '<span class = "apple">o</span>';
             }
-
-            // append cached board element to DOM
-            $('.board').html(freshBoard);
-
-            // update dashboard with parachute/life/score count
-            $('.parachutes').text($parachuteCount);
-            $('.lives').text($lifeCount);
-            $('.score').text($scoreCount);
-        };
-
-        // initial rendering
-        $render();
-
-        // end of document ready loop
-    });
-
-    $postHighScore = function() {
-
-        var hsText = localStorage.getItem('highScore');
-
-        if (!hsText) {
-            hsText = '0';
-        }
-        $('.highScore').text(hsText);
-    };
-
-    $deploy = function(board) {
-        board.deploy();
-    };
-
-    $bonusChuteAdder = function() {
-        $parachuteCount++;
-    };
-
-    $endOfGame = function() {
-        clearInterval($advancer);
-        clearInterval($generator);
-        $gameOn = false;
-        localStorage.setItem('date', new Date());
-        localStorage.setItem('lastScore', $scoreCount);
-        if (localStorage.getItem('highScore') === null) {
-            localStorage.setItem('highScore', 0);
-        }
-        if (localStorage.getItem('highScore') < $scoreCount) {
-            localStorage.setItem('highScore', $scoreCount);
-        }
-        $postHighScore();
-
-        if ($firstRun) {
-            $('.instructions').prepend('GAME OVER!<br><br>');
-            $firstRun = false;
-        }
-        $('.instructions').toggle(700);
-    };
-
-    $startOfGame = function() {
-        clearInterval($advancer);
-        clearInterval($generator);
-        $gameOn = false;
-    };
-
-    // set up gravity simulation
-    $timeDecreaser = {
-        cache: [750, 700, 680, 650, 600, 550, 500, 450, 400, 350, 300, 275, 250, 200, 200, 200, 150],
-        current: 4,
-        span: function() {
-            if (this.current < this.cache.length - 1) {
-                this.current++;
+            if (this.board[i][j] === 'p') {
+                freshBoard += '<span class = "parachute">p</span>';
             }
-            return this.cache[this.current];
+            if (this.board[i][j] === 'x') {
+                freshBoard += '<span class = "spot">|</span>';
+            }
+            if (this.board[i][j] === 'b') {
+                freshBoard += '<span class = "brick">+</span>';
+            }
+            if (this.board[i][j] === 'e') {
+                freshBoard += '<span class = "bonusParachute">p</span>';
+            }
         }
-    };
+        freshBoard += '</span><br>';
+    }
 
-    // set interval of advancement
-    $advanceIt = function() {
-
-        if (!$gameOn) {
-            return null;
-        }
-        $advancer = setTimeout(function() {
-            $obstacleAdvance($board.board);
-            $obstacleGen($board.board);
-            $advanceIt();
-        }, $timeDecreaser.span());
-
-    };
-    $advanceIt();
-
-    // set interval of obstacle generation
-    $generator = setInterval(function() {
-        $obstacleGen($board.board);
-        $render();
-    }, 300);
-
-    $('.status').text('');
-};
-$init();
-
-var keyRight = function() {
-    $sideCollisionDetectRight($board.board);
-    $board.moveRight();
-    $render();
+    // append cached board element to DOM
+    $('.board').html(freshBoard);
+    this.updateCounters();
 };
 
-var keyLeft = function() {
-    $sideCollisionDetectLeft($board.board);
-    $board.moveLeft();
-    $render();
+BoardMaker.prototype.updateCounters = function() {
+    // update dashboard with parachute/life/score count
+    $('.parachutes').text(this.$parachuteCount);
+    $('.lives').text(this.$lifeCount);
+    $('.score').text(this.$scoreCount);
 };
 
-$(function() {
-
-    // sets initial state so that user must initiate game with 's' or click
-    $startOfGame();
-
-    $('body').on('keydown', function(e) {
-        if ($gameOn) {
-            if (e.keyCode === 39) { // right arrow
-                keyRight();
-            }
-            if (e.keyCode === 37) { // left arrow
-                keyLeft();
-            }
-            if (e.keyCode === 32) { // space bar
-                $deploy($board);
-                $render();
-            }
-        }
-        if (!$gameOn) {
-            if (e.keyCode === 32) { // space bar
-                $('.instructions').toggle(200);
-                $init();
-            }
-        }
-    });
-});
 
 // generates bricks
-$obstacleGen = function(board) {
+BoardMaker.prototype.$obstacleGen = function(board) {
     var randomNumber = Math.random();
     // generates obstacles in the first row
     if (randomNumber < 0.5) {
@@ -274,9 +152,9 @@ $obstacleGen = function(board) {
 };
 
 // advances obstacles
-$obstacleAdvance = function(board) {
-    if ($collisionDetect(board)) {
-        $collisionHappened();
+BoardMaker.prototype.$obstacleAdvance = function(board) {
+    if (this.$collisionDetect(board)) {
+        this.$collisionHappened();
     }
     for (var i = 0; i < board.length - 1; i++) {
         for (var j = 0; j < board[i].length; j++) {
@@ -286,19 +164,20 @@ $obstacleAdvance = function(board) {
             }
         }
     }
-    $render();
-    $scoreCount += 100;
-    if ($scoreCount % $bonusChuteMultiple === 0) {
-        $board.board[$board.board.length - 2][Math.floor(Math.random() * $board.board[0].length)] = 'e';
+    this.$render();
+    this.$scoreCount += 100;
+    if (this.$scoreCount % this.$bonusChuteMultiple === 0) {
+        this.board[this.board.length - 2][Math.floor(Math.random() * this.board[0].length)] = 'e';
     }
 };
 
+
 // detects non-empty squares below apple before advancing row
-$collisionDetect = function(board) {
+BoardMaker.prototype.$collisionDetect = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[1][i] === 'e') {
-                $bonusChuteAdder();
+                this.$bonusChuteAdder();
                 return false;
             }
         }
@@ -311,17 +190,17 @@ $collisionDetect = function(board) {
     return false;
 };
 
-$sideCollisionDetectRight = function(board) {
+BoardMaker.prototype.$sideCollisionDetectRight = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i + 1] === 'e') {
-                $bonusChuteAdder();
+                this.$bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i + 1] === 'b') {
-                $collisionHappened();
+                this.$collisionHappened();
                 return true;
             }
         }
@@ -329,17 +208,17 @@ $sideCollisionDetectRight = function(board) {
     return false;
 };
 
-$sideCollisionDetectLeft = function(board) {
+BoardMaker.prototype.$sideCollisionDetectLeft = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i - 1] === 'e') {
-                $bonusChuteAdder();
+                this.$bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i - 1] === 'b') {
-                $collisionHappened();
+                this.$collisionHappened();
                 return true;
             }
         }
@@ -347,15 +226,165 @@ $sideCollisionDetectLeft = function(board) {
     return false;
 };
 
-$collisionHappened = function() {
-    $('.container').toggleClass('crashFlash');
+BoardMaker.prototype.$collisionHappened = function() {
+    $('.container').addClass('crashFlash');
     setTimeout(function() {
-        $('.container').toggleClass('crashFlash');
+        $('.container').removeClass('crashFlash');
     }, 50);
 
-    if ($lifeCount === 0) {
-        $endOfGame();
+    if (this.$lifeCount === 0) {
+        $(this).trigger('endOfGame');
     } else {
-        $lifeCount--;
+        this.$lifeCount--;
     }
 };
+
+var GameLoop = function() {
+    this.board = null;
+    this.$firstRun = true;
+    this.$timeDecreaser = {
+        chuteStart: 6,
+        defaultStart: 4,
+        cache: [750, 700, 680, 650, 600, 550, 500, 450, 400, 350, 300, 275, 250, 200, 200, 200, 150],
+        current: this.defaultStart,
+        parachuteDeployed: function() {
+            this.current = this.chuteStart;
+        },
+        span: function() {
+            if (this.current < this.cache.length - 1) {
+                this.current++;
+            }
+            return this.cache[this.current];
+        },
+        reset: function() {
+            this.current = this.defaultStart;
+        }
+    };
+
+
+};
+
+GameLoop.prototype.$postHighScore = function() {
+    var hsText = localStorage.getItem('highScore');
+
+    if (!hsText) {
+        hsText = '0';
+    }
+    $('.highScore').text(hsText);
+};
+
+GameLoop.prototype.$endOfGame = function() {
+    clearInterval($advancer);
+    clearInterval($generator);
+    this.board.$gameOn = false;
+    localStorage.setItem('date', new Date());
+    localStorage.setItem('lastScore', this.board.$scoreCount);
+    if (localStorage.getItem('highScore') === null) {
+        localStorage.setItem('highScore', 0);
+    }
+    if (localStorage.getItem('highScore') < this.board.$scoreCount) {
+        localStorage.setItem('highScore', this.board.$scoreCount);
+    }
+    this.$postHighScore();
+
+    if (this.$firstRun) {
+        $('.instructions').prepend('GAME OVER!<br><br>');
+        this.$firstRun = false;
+    }
+    $('.instructions').toggle(400);
+};
+
+GameLoop.prototype.$advanceIt = function() {
+    var self = this;
+    if (!this.board.$gameOn) {
+        return null;
+    }
+    $advancer = setTimeout(function() {
+        self.board.$obstacleAdvance(self.board.board);
+        self.board.$obstacleGen(self.board.board);
+        self.$advanceIt();
+    }, self.$timeDecreaser.span());
+};
+
+GameLoop.prototype.$init = function() {
+    var self = this;
+
+    this.board = new BoardMaker(5, 8);
+    $(this.board).on('endOfGame', function() {
+        self.$endOfGame();
+    });
+
+    // place apple
+    this.board.placeApple();
+
+    // reset gravity to starting amount
+    this.$timeDecreaser.reset();
+
+    $(function() {
+        $('.chuteMultiple').text(self.board.$bonusChuteMultiple);
+        self.$postHighScore();
+
+        // initial rendering
+        self.board.$render();
+    });
+
+    this.$advanceIt();
+
+    // set interval of obstacle generation
+    $generator = setInterval(function() {
+        self.board.$obstacleGen(self.board.board);
+        self.board.$render();
+    }, 300);
+
+    $('.status').text('');
+};
+
+var game = new GameLoop();
+game.$init();
+
+var keyRight = function() {
+    game.board.$sideCollisionDetectRight(game.board.board);
+    game.board.moveRight(game.board.board);
+    game.board.$render();
+};
+
+var keyLeft = function() {
+    game.board.$sideCollisionDetectLeft(game.board.board);
+    game.board.moveLeft(game.board.board);
+    game.board.$render();
+};
+
+$clearTurnGenerators = function() {
+    clearInterval($advancer);
+    clearInterval($generator);
+    game.board.$gameOn = false;
+};
+
+
+$(function() {
+
+    // sets initial state so that user must initiate game with 's' or click
+    $clearTurnGenerators();
+
+    $('body').on('keydown', function(e) {
+        if (game.board.$gameOn) {
+            if (e.keyCode === 39) { // right arrow
+                keyRight();
+            }
+            if (e.keyCode === 37) { // left arrow
+                keyLeft();
+            }
+            if (e.keyCode === 32) { // space bar
+                game.board.deploy();
+                game.$timeDecreaser.parachuteDeployed();
+                game.board.$render();
+            }
+        }
+        if (!game.board.$gameOn) {
+            if (e.keyCode === 32) { // space bar
+                $('.instructions').toggle(200);
+                game.$init();
+            }
+        }
+    });
+});
