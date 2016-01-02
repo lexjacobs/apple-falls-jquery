@@ -4,13 +4,16 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        concat: {
-            options: {
-                separator: '\n'
-            },
+        browserify: {
             dist: {
-                src: ['app/script/*.js'],
-                dest: 'dist/apple-falls.js'
+                files: {
+                    'bundle.js': './app/script/gameLoop'
+                },
+                options: {
+                    alias: {
+                        'game': './app/script/gameLoop'
+                    }
+                }
             }
         },
 
@@ -31,9 +34,9 @@ module.exports = function(grunt) {
         },
 
         notify: {
-            concat: {
+            browserify: {
                 options: {
-                    message: 'file concat done'
+                    message: 'browserify bundle done'
                 }
             },
             oops: {
@@ -49,19 +52,6 @@ module.exports = function(grunt) {
             }
         },
 
-        uglify: {
-            options: {
-                // the banner is inserted at the top of the output
-                sourceMap:true,
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
-            },
-            dist: {
-                files: {
-                    'dist/apple-falls.min.js': ['dist/apple-falls.js']
-                }
-            }
-        },
-
         watch: {
             js: {
                 files: ['app/styles/style.less'],
@@ -69,16 +59,15 @@ module.exports = function(grunt) {
             },
             styles: {
                 files: ['app/script/*.js', 'Gruntfile.js'],
-                tasks: ['concat', 'uglify', 'notify:concat']
+                tasks: ['browserify', 'notify:browserify']
             }
         }
 
     });
 
+    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-serve');
 

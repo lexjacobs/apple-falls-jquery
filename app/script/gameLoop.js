@@ -1,3 +1,5 @@
+var BoardMaker = require('./board');
+
 var GameLoop = function() {
     this.firstRun = true;
     this.timeDecreaser = {
@@ -34,12 +36,12 @@ GameLoop.prototype.endOfGame = function() {
     clearInterval(generator);
     this.board.gameOn = false;
     localStorage.setItem('date', new Date());
-    localStorage.setItem('lastScore', this.board.$scoreCount);
+    localStorage.setItem('lastScore', this.board.scoreCount);
     if (localStorage.getItem('highScore') === null) {
         localStorage.setItem('highScore', 0);
     }
-    if (localStorage.getItem('highScore') < this.board.$scoreCount) {
-        localStorage.setItem('highScore', this.board.$scoreCount);
+    if (localStorage.getItem('highScore') < this.board.scoreCount) {
+        localStorage.setItem('highScore', this.board.scoreCount);
     }
     this.postHighScore();
 
@@ -92,17 +94,20 @@ GameLoop.prototype.clearTurnGenerators = function() {
     this.board.gameOn = false;
 };
 
+GameLoop.prototype.keyRight = function() {
+    this.board.sideCollisionDetectRight(this.board.board);
+    this.board.moveRight(this.board.board);
+    this.board.render();
+};
+
+GameLoop.prototype.keyLeft = function() {
+    this.board.sideCollisionDetectLeft(this.board.board);
+    this.board.moveLeft(this.board.board);
+    this.board.render();
+};
+
 var game = new GameLoop();
 game.init();
 
-var keyRight = function() {
-    game.board.sideCollisionDetectRight(game.board.board);
-    game.board.moveRight(game.board.board);
-    game.board.render();
-};
 
-var keyLeft = function() {
-    game.board.sideCollisionDetectLeft(game.board.board);
-    game.board.moveLeft(game.board.board);
-    game.board.render();
-};
+module.exports = game;

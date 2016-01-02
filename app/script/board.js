@@ -8,7 +8,7 @@ var BoardMaker = function(nX, nY) {
     this.parachuteCount = 3;
     this.lifeCount = 3;
     this.scoreCount = 0;
-    this.bonusChuteMultiple = 1000;
+    this.bonusChuteMultiple = 3000;
 
 };
 
@@ -238,3 +238,5 @@ BoardMaker.prototype.collisionHappened = function() {
         this.lifeCount--;
     }
 };
+
+module.exports = BoardMaker;

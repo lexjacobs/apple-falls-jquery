@@ -3,7 +3,7 @@
   <head>
     <title>Apple Falls</title>
     <script src="jquery-2.1.1.min.js"></script>
-    <script src="dist/apple-falls.min.js"></script>
+    <script src="bundle.js"></script>
     <link rel="stylesheet" type="text/css" href="app/styles/style.css" />
     <meta name="description" content="Apple Falls is an infinite-scroll style game in which the player controls an Apple that falls down an endless chasm, accelerating at the rate of 9.8 m/s/s (until it hits terminal velocity). The player also starts with one parachute, which may be deployed at any time by pressing the space bar. Upon deployment, the Apple's rate of descent slows until the parachute's ac">
   </head>
@@ -36,6 +36,8 @@
   </body>
   <script>
 
+  var game = require('game');
+
     $(function() {
 
         // sets initial state so that user must initiate game with 's' or click
@@ -50,10 +52,10 @@
         $('body').on('keydown', function(e) {
             if (game.board.gameOn) {
                 if (e.keyCode === 39) { // right arrow
-                    keyRight();
+                    game.keyRight();
                 }
                 if (e.keyCode === 37) { // left arrow
-                    keyLeft();
+                    game.keyLeft();
                 }
                 if (e.keyCode === 32) { // space bar
                     game.board.deploy();
