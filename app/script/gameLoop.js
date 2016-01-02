@@ -7,9 +7,6 @@ $init = function() {
     $lifeCount = 3;
     $scoreCount = 0;
     $bonusChuteMultiple = 5000;
-    $postHighScore = function() {
-        $('.highScore').text(localStorage.getItem('highScore'));
-    };
 
     $board = new BoardMaker(5, 8);
 
@@ -19,11 +16,7 @@ $init = function() {
     $(function() {
 
         $('.chuteMultiple').text($bonusChuteMultiple);
-        if (localStorage.getItem('highScore')) {
-            $postHighScore();
-        } else {
-            $('.highScore').text('0');
-        }
+        $postHighScore();
 
         $render = function() {
 
@@ -67,6 +60,16 @@ $init = function() {
 
         // end of document ready loop
     });
+
+    $postHighScore = function() {
+
+        var hsText = localStorage.getItem('highScore');
+
+        if (!hsText) {
+            hsText = '0';
+        }
+        $('.highScore').text(hsText);
+    };
 
     $deploy = function(board) {
         board.deploy();

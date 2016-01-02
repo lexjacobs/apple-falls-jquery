@@ -29,7 +29,7 @@ $(function() {
             }
         }
         if (!$gameOn) {
-            if (e.keyCode === 32) { // s
+            if (e.keyCode === 32) { // space bar
                 $('.instructions').toggle(200);
                 $init();
             }

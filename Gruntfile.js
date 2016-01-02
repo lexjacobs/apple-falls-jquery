@@ -45,18 +45,14 @@ module.exports = function(grunt) {
 
         serve: {
             options: {
-                port: 9000,
-                'client.js': {
-                    tasks: ['concat'],
-                    output: 'blahblah.js'
-                }
+                port: 9000
             }
         },
 
         uglify: {
             options: {
                 // the banner is inserted at the top of the output
-                banner: '/*! apple-falls, now 83% smaller! <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
             },
             dist: {
                 files: {
@@ -71,7 +67,7 @@ module.exports = function(grunt) {
                 tasks: ['less']
             },
             styles: {
-                files: ['app/script/*.js'],
+                files: ['app/script/*.js', 'Gruntfile.js'],
                 tasks: ['concat', 'uglify', 'notify:concat']
             }
         }
