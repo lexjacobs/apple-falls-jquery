@@ -9,17 +9,17 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['app/script/*.js'],
-        dest: '<%= pkg.name %>.js'
+        dest: 'dist/apple-falls.js'
       }
     },
     uglify: {
       options: {
         // the banner is inserted at the top of the output
-        banner: '/*! <%= pkg.name %>, now 83% smaller! <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
+        banner: '/*! apple-falls, now 83% smaller! <%= grunt.template.today("dd-mmmm-yyyy") %> */\n'
       },
       dist: {
         files: {
-          '<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'dist/apple-falls.min.js': ['dist/apple-falls.js']
         }
       }
     },
