@@ -70,13 +70,13 @@ describe('Apple Falls', function() {
             b.board[4] = ['b', 'b', 'b', 'b', 'b'];
 
             // nothing around
-            expect(b.$collisionDetect(b.board)).to.equal(false);
+            expect(b.collisionDetect(b.board)).to.equal(false);
 
             // move obstacles to next row up
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
-            expect(b.$collisionDetect(b.board)).to.equal(true);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
+            expect(b.collisionDetect(b.board)).to.equal(true);
 
             // add two rows of solid obstacles
             b = new BoardMaker(5, 6);
@@ -89,18 +89,18 @@ describe('Apple Falls', function() {
             expect(b.board[0][0]).to.equal('p');
 
             // advance obstacles
-            expect(b.$collisionDetect(b.board)).to.equal(false);
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
+            expect(b.collisionDetect(b.board)).to.equal(false);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
             // should be invincible
-            expect(b.$collisionDetect(b.board)).to.equal(false);
+            expect(b.collisionDetect(b.board)).to.equal(false);
 
             // next row however should collide
             b.undeploy();
             expect(b.board[0][0]).to.equal('o');
             expect(b.board[0][1]).to.equal('x');
-            expect(b.$collisionDetect(b.board)).to.equal(true);
+            expect(b.collisionDetect(b.board)).to.equal(true);
 
 
         });
@@ -109,22 +109,22 @@ describe('Apple Falls', function() {
             b = new BoardMaker(5, 5);
             b.board[0][0] = 'o';
             b.board[4] = ['b', 'b', 'b', 'b', 'b'];
-            expect(b.$collisionDetect(b.board)).to.equal(false);
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
-            b.$obstacleAdvance(b.board);
-            expect(b.$collisionDetect(b.board)).to.equal(true);
+            expect(b.collisionDetect(b.board)).to.equal(false);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
+            b.obstacleAdvance(b.board);
+            expect(b.collisionDetect(b.board)).to.equal(true);
         });
 
         it('side collisions with non-blank spaces should be detected', function() {
             b = new BoardMaker(5, 5);
             b.board[0][2] = 'o';
             b.board[1] = ['b', 'b', 'b', 'b', 'b'];
-            expect(b.$collisionDetect(b.board)).to.equal(true);
-            b.$obstacleAdvance(b.board);
-            expect(b.$collisionDetect(b.board)).to.equal(false);
-            expect(b.$sideCollisionDetectRight(b.board)).to.equal(true);
-            expect(b.$sideCollisionDetectLeft(b.board)).to.equal(true);
+            expect(b.collisionDetect(b.board)).to.equal(true);
+            b.obstacleAdvance(b.board);
+            expect(b.collisionDetect(b.board)).to.equal(false);
+            expect(b.sideCollisionDetectRight(b.board)).to.equal(true);
+            expect(b.sideCollisionDetectLeft(b.board)).to.equal(true);
         });
 
         it('collisions should be ignored when parachute is deployed', function() {
@@ -132,30 +132,30 @@ describe('Apple Falls', function() {
             b.board[0][2] = 'o';
             b.deploy();
             b.board[1] = ['b', 'b', 'b', 'b', 'b'];
-            expect(b.$collisionDetect(b.board)).to.equal(false);
-            b.$obstacleAdvance(b.board);
-            expect(b.$sideCollisionDetectRight(b.board)).to.equal(false);
-            expect(b.$sideCollisionDetectLeft(b.board)).to.equal(false);
+            expect(b.collisionDetect(b.board)).to.equal(false);
+            b.obstacleAdvance(b.board);
+            expect(b.sideCollisionDetectRight(b.board)).to.equal(false);
+            expect(b.sideCollisionDetectLeft(b.board)).to.equal(false);
         });
 
         it('bonus parachutes should increment counter upon collision', function() {
             b = new BoardMaker(5, 5);
             b.board[0][2] = 'o';
-            b.$parachuteCount = 1;
+            b.parachuteCount = 1;
             b.board[1][2] = 'e';
-            expect(b.$parachuteCount).to.equal(1);
-            b.$obstacleAdvance(b.board);
-            expect(b.$parachuteCount).to.equal(2);
+            expect(b.parachuteCount).to.equal(1);
+            b.obstacleAdvance(b.board);
+            expect(b.parachuteCount).to.equal(2);
             b.board[0][1] = 'e';
-            b.$sideCollisionDetectLeft(b.board);
-            expect(b.$parachuteCount).to.equal(3);
+            b.sideCollisionDetectLeft(b.board);
+            expect(b.parachuteCount).to.equal(3);
             b.board[0][1] = 'x';
             b.board[0][0] = 'e';
-            b.$sideCollisionDetectLeft(b.board);
-            expect(b.$parachuteCount).to.equal(3);
+            b.sideCollisionDetectLeft(b.board);
+            expect(b.parachuteCount).to.equal(3);
             b.board[0][3] = 'e';
-            b.$sideCollisionDetectRight(b.board);
-            expect(b.$parachuteCount).to.equal(4);
+            b.sideCollisionDetectRight(b.board);
+            expect(b.parachuteCount).to.equal(4);
         });
     });
 

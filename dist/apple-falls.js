@@ -4,16 +4,16 @@ var BoardMaker = function(nX, nY) {
     this.board = [];
     this.primeBoard(this.board, this.row, this.col);
 
-    this.$gameOn = true;
-    this.$parachuteCount = 3;
-    this.$lifeCount = 3;
-    this.$scoreCount = 0;
-    this.$bonusChuteMultiple = 1000;
+    this.gameOn = true;
+    this.parachuteCount = 3;
+    this.lifeCount = 3;
+    this.scoreCount = 0;
+    this.bonusChuteMultiple = 1000;
 
 };
 
-BoardMaker.prototype.$bonusChuteAdder = function() {
-    this.$parachuteCount++;
+BoardMaker.prototype.bonusChuteAdder = function() {
+    this.parachuteCount++;
 };
 
 BoardMaker.prototype.placeApple = function() {
@@ -68,13 +68,13 @@ BoardMaker.prototype.moveLeft = function(board) {
 
 BoardMaker.prototype.deploy = function() {
     var timeoutFlag = false;
-    if (this.$parachuteCount === 0) {
+    if (this.parachuteCount === 0) {
         return false;
     }
     for (var i = 0; i < this.board[0].length; i++) {
         if (this.board[0][i] === 'o') {
             this.board[0][i] = 'p';
-            this.$parachuteCount--;
+            this.parachuteCount--;
             timeoutFlag = true;
             break;
         }
@@ -98,7 +98,7 @@ BoardMaker.prototype.undeploy = function() {
     return true;
 };
 
-BoardMaker.prototype.$render = function(board) {
+BoardMaker.prototype.render = function(board) {
 
     // iterate through board and cache each item found in arrays
     var freshBoard = '';
@@ -133,14 +133,14 @@ BoardMaker.prototype.$render = function(board) {
 
 BoardMaker.prototype.updateCounters = function() {
     // update dashboard with parachute/life/score count
-    $('.parachutes').text(this.$parachuteCount);
-    $('.lives').text(this.$lifeCount);
-    $('.score').text(this.$scoreCount);
+    $('.parachutes').text(this.parachuteCount);
+    $('.lives').text(this.lifeCount);
+    $('.score').text(this.scoreCount);
 };
 
 
 // generates bricks
-BoardMaker.prototype.$obstacleGen = function(board) {
+BoardMaker.prototype.obstacleGen = function(board) {
     var randomNumber = Math.random();
     // generates obstacles in the first row
     if (randomNumber < 0.5) {
@@ -152,9 +152,9 @@ BoardMaker.prototype.$obstacleGen = function(board) {
 };
 
 // advances obstacles
-BoardMaker.prototype.$obstacleAdvance = function(board) {
-    if (this.$collisionDetect(board)) {
-        this.$collisionHappened();
+BoardMaker.prototype.obstacleAdvance = function(board) {
+    if (this.collisionDetect(board)) {
+        this.collisionHappened();
     }
     for (var i = 0; i < board.length - 1; i++) {
         for (var j = 0; j < board[i].length; j++) {
@@ -164,20 +164,20 @@ BoardMaker.prototype.$obstacleAdvance = function(board) {
             }
         }
     }
-    this.$render();
-    this.$scoreCount += 100;
-    if (this.$scoreCount % this.$bonusChuteMultiple === 0) {
+    this.render();
+    this.scoreCount += 100;
+    if (this.scoreCount % this.bonusChuteMultiple === 0) {
         this.board[this.board.length - 2][Math.floor(Math.random() * this.board[0].length)] = 'e';
     }
 };
 
 
 // detects non-empty squares below apple before advancing row
-BoardMaker.prototype.$collisionDetect = function(board) {
+BoardMaker.prototype.collisionDetect = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[1][i] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
@@ -190,17 +190,17 @@ BoardMaker.prototype.$collisionDetect = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$sideCollisionDetectRight = function(board) {
+BoardMaker.prototype.sideCollisionDetectRight = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i + 1] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i + 1] === 'b') {
-                this.$collisionHappened();
+                this.collisionHappened();
                 return true;
             }
         }
@@ -208,17 +208,17 @@ BoardMaker.prototype.$sideCollisionDetectRight = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$sideCollisionDetectLeft = function(board) {
+BoardMaker.prototype.sideCollisionDetectLeft = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i - 1] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i - 1] === 'b') {
-                this.$collisionHappened();
+                this.collisionHappened();
                 return true;
             }
         }
@@ -226,23 +226,22 @@ BoardMaker.prototype.$sideCollisionDetectLeft = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$collisionHappened = function() {
+BoardMaker.prototype.collisionHappened = function() {
     $('.container').addClass('crashFlash');
     setTimeout(function() {
         $('.container').removeClass('crashFlash');
     }, 50);
 
-    if (this.$lifeCount === 0) {
+    if (this.lifeCount === 0) {
         $(this).trigger('endOfGame');
     } else {
-        this.$lifeCount--;
+        this.lifeCount--;
     }
 };
 
 var GameLoop = function() {
-    this.board = null;
-    this.$firstRun = true;
-    this.$timeDecreaser = {
+    this.firstRun = true;
+    this.timeDecreaser = {
         chuteStart: 6,
         defaultStart: 4,
         cache: [750, 700, 680, 650, 600, 550, 500, 450, 400, 350, 300, 275, 250, 200, 200, 200, 150],
@@ -260,11 +259,9 @@ var GameLoop = function() {
             this.current = this.defaultStart;
         }
     };
-
-
 };
 
-GameLoop.prototype.$postHighScore = function() {
+GameLoop.prototype.postHighScore = function() {
     var hsText = localStorage.getItem('highScore');
 
     if (!hsText) {
@@ -273,10 +270,10 @@ GameLoop.prototype.$postHighScore = function() {
     $('.highScore').text(hsText);
 };
 
-GameLoop.prototype.$endOfGame = function() {
-    clearInterval($advancer);
-    clearInterval($generator);
-    this.board.$gameOn = false;
+GameLoop.prototype.endOfGame = function() {
+    clearInterval(advancer);
+    clearInterval(generator);
+    this.board.gameOn = false;
     localStorage.setItem('date', new Date());
     localStorage.setItem('lastScore', this.board.$scoreCount);
     if (localStorage.getItem('highScore') === null) {
@@ -285,106 +282,68 @@ GameLoop.prototype.$endOfGame = function() {
     if (localStorage.getItem('highScore') < this.board.$scoreCount) {
         localStorage.setItem('highScore', this.board.$scoreCount);
     }
-    this.$postHighScore();
+    this.postHighScore();
 
-    if (this.$firstRun) {
+    if (this.firstRun) {
         $('.instructions').prepend('GAME OVER!<br><br>');
-        this.$firstRun = false;
+        this.firstRun = false;
     }
     $('.instructions').toggle(400);
 };
 
-GameLoop.prototype.$advanceIt = function() {
+GameLoop.prototype.advanceIt = function() {
     var self = this;
-    if (!this.board.$gameOn) {
+    if (!this.board.gameOn) {
         return null;
     }
-    $advancer = setTimeout(function() {
-        self.board.$obstacleAdvance(self.board.board);
-        self.board.$obstacleGen(self.board.board);
-        self.$advanceIt();
-    }, self.$timeDecreaser.span());
+    advancer = setTimeout(function() {
+        self.board.obstacleAdvance(self.board.board);
+        self.board.obstacleGen(self.board.board);
+        self.advanceIt();
+    }, self.timeDecreaser.span());
 };
 
-GameLoop.prototype.$init = function() {
+GameLoop.prototype.init = function() {
     var self = this;
 
     this.board = new BoardMaker(5, 8);
     $(this.board).on('endOfGame', function() {
-        self.$endOfGame();
+        self.endOfGame();
     });
 
     // place apple
     this.board.placeApple();
 
     // reset gravity to starting amount
-    this.$timeDecreaser.reset();
-
-    $(function() {
-        $('.chuteMultiple').text(self.board.$bonusChuteMultiple);
-        self.$postHighScore();
-
-        // initial rendering
-        self.board.$render();
-    });
-
-    this.$advanceIt();
+    this.timeDecreaser.reset();
+    this.advanceIt();
 
     // set interval of obstacle generation
-    $generator = setInterval(function() {
-        self.board.$obstacleGen(self.board.board);
-        self.board.$render();
+    generator = setInterval(function() {
+        self.board.obstacleGen(self.board.board);
+        self.board.render();
     }, 300);
 
     $('.status').text('');
 };
 
+GameLoop.prototype.clearTurnGenerators = function() {
+    clearInterval(advancer);
+    clearInterval(generator);
+    this.board.gameOn = false;
+};
+
 var game = new GameLoop();
-game.$init();
+game.init();
 
 var keyRight = function() {
-    game.board.$sideCollisionDetectRight(game.board.board);
+    game.board.sideCollisionDetectRight(game.board.board);
     game.board.moveRight(game.board.board);
-    game.board.$render();
+    game.board.render();
 };
 
 var keyLeft = function() {
-    game.board.$sideCollisionDetectLeft(game.board.board);
+    game.board.sideCollisionDetectLeft(game.board.board);
     game.board.moveLeft(game.board.board);
-    game.board.$render();
+    game.board.render();
 };
-
-$clearTurnGenerators = function() {
-    clearInterval($advancer);
-    clearInterval($generator);
-    game.board.$gameOn = false;
-};
-
-
-$(function() {
-
-    // sets initial state so that user must initiate game with 's' or click
-    $clearTurnGenerators();
-
-    $('body').on('keydown', function(e) {
-        if (game.board.$gameOn) {
-            if (e.keyCode === 39) { // right arrow
-                keyRight();
-            }
-            if (e.keyCode === 37) { // left arrow
-                keyLeft();
-            }
-            if (e.keyCode === 32) { // space bar
-                game.board.deploy();
-                game.$timeDecreaser.parachuteDeployed();
-                game.board.$render();
-            }
-        }
-        if (!game.board.$gameOn) {
-            if (e.keyCode === 32) { // space bar
-                $('.instructions').toggle(200);
-                game.$init();
-            }
-        }
-    });
-});

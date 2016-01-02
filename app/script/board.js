@@ -4,16 +4,16 @@ var BoardMaker = function(nX, nY) {
     this.board = [];
     this.primeBoard(this.board, this.row, this.col);
 
-    this.$gameOn = true;
-    this.$parachuteCount = 3;
-    this.$lifeCount = 3;
-    this.$scoreCount = 0;
-    this.$bonusChuteMultiple = 1000;
+    this.gameOn = true;
+    this.parachuteCount = 3;
+    this.lifeCount = 3;
+    this.scoreCount = 0;
+    this.bonusChuteMultiple = 1000;
 
 };
 
-BoardMaker.prototype.$bonusChuteAdder = function() {
-    this.$parachuteCount++;
+BoardMaker.prototype.bonusChuteAdder = function() {
+    this.parachuteCount++;
 };
 
 BoardMaker.prototype.placeApple = function() {
@@ -68,13 +68,13 @@ BoardMaker.prototype.moveLeft = function(board) {
 
 BoardMaker.prototype.deploy = function() {
     var timeoutFlag = false;
-    if (this.$parachuteCount === 0) {
+    if (this.parachuteCount === 0) {
         return false;
     }
     for (var i = 0; i < this.board[0].length; i++) {
         if (this.board[0][i] === 'o') {
             this.board[0][i] = 'p';
-            this.$parachuteCount--;
+            this.parachuteCount--;
             timeoutFlag = true;
             break;
         }
@@ -98,7 +98,7 @@ BoardMaker.prototype.undeploy = function() {
     return true;
 };
 
-BoardMaker.prototype.$render = function(board) {
+BoardMaker.prototype.render = function(board) {
 
     // iterate through board and cache each item found in arrays
     var freshBoard = '';
@@ -133,14 +133,14 @@ BoardMaker.prototype.$render = function(board) {
 
 BoardMaker.prototype.updateCounters = function() {
     // update dashboard with parachute/life/score count
-    $('.parachutes').text(this.$parachuteCount);
-    $('.lives').text(this.$lifeCount);
-    $('.score').text(this.$scoreCount);
+    $('.parachutes').text(this.parachuteCount);
+    $('.lives').text(this.lifeCount);
+    $('.score').text(this.scoreCount);
 };
 
 
 // generates bricks
-BoardMaker.prototype.$obstacleGen = function(board) {
+BoardMaker.prototype.obstacleGen = function(board) {
     var randomNumber = Math.random();
     // generates obstacles in the first row
     if (randomNumber < 0.5) {
@@ -152,9 +152,9 @@ BoardMaker.prototype.$obstacleGen = function(board) {
 };
 
 // advances obstacles
-BoardMaker.prototype.$obstacleAdvance = function(board) {
-    if (this.$collisionDetect(board)) {
-        this.$collisionHappened();
+BoardMaker.prototype.obstacleAdvance = function(board) {
+    if (this.collisionDetect(board)) {
+        this.collisionHappened();
     }
     for (var i = 0; i < board.length - 1; i++) {
         for (var j = 0; j < board[i].length; j++) {
@@ -164,20 +164,20 @@ BoardMaker.prototype.$obstacleAdvance = function(board) {
             }
         }
     }
-    this.$render();
-    this.$scoreCount += 100;
-    if (this.$scoreCount % this.$bonusChuteMultiple === 0) {
+    this.render();
+    this.scoreCount += 100;
+    if (this.scoreCount % this.bonusChuteMultiple === 0) {
         this.board[this.board.length - 2][Math.floor(Math.random() * this.board[0].length)] = 'e';
     }
 };
 
 
 // detects non-empty squares below apple before advancing row
-BoardMaker.prototype.$collisionDetect = function(board) {
+BoardMaker.prototype.collisionDetect = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[1][i] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
@@ -190,17 +190,17 @@ BoardMaker.prototype.$collisionDetect = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$sideCollisionDetectRight = function(board) {
+BoardMaker.prototype.sideCollisionDetectRight = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i + 1] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i + 1] === 'b') {
-                this.$collisionHappened();
+                this.collisionHappened();
                 return true;
             }
         }
@@ -208,17 +208,17 @@ BoardMaker.prototype.$sideCollisionDetectRight = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$sideCollisionDetectLeft = function(board) {
+BoardMaker.prototype.sideCollisionDetectLeft = function(board) {
     for (var i = 0; i < board[0].length; i++) {
         if (board[0][i] === 'p' || board[0][i] === 'o') {
             if (board[0][i - 1] === 'e') {
-                this.$bonusChuteAdder();
+                this.bonusChuteAdder();
                 return false;
             }
         }
         if (board[0][i] === 'o' && board[0][i] !== 'p') {
             if (board[0][i - 1] === 'b') {
-                this.$collisionHappened();
+                this.collisionHappened();
                 return true;
             }
         }
@@ -226,15 +226,15 @@ BoardMaker.prototype.$sideCollisionDetectLeft = function(board) {
     return false;
 };
 
-BoardMaker.prototype.$collisionHappened = function() {
+BoardMaker.prototype.collisionHappened = function() {
     $('.container').addClass('crashFlash');
     setTimeout(function() {
         $('.container').removeClass('crashFlash');
     }, 50);
 
-    if (this.$lifeCount === 0) {
+    if (this.lifeCount === 0) {
         $(this).trigger('endOfGame');
     } else {
-        this.$lifeCount--;
+        this.lifeCount--;
     }
 };
